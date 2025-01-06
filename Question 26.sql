@@ -1,53 +1,56 @@
-Note: parent_id is null for posts.
-parent_id for comments is sub_id for another post in the table.
-Write an sql query to find the number of comments per post.
-Result table should contain post_id and its corresponding number_of_comments, and must be sorted by post_id in ascending order.
---> Submissions may contain duplicate comments. You should count the number of unique comments per post.
---> Submissions may contain duplicate posts. You should treat them as one post.
+Given a city_distance table with columns distance, source, and destination, write a query to find routes that either Lack a reverse route, Have inconsistent distances between the forward and reverse routes, or
+List duplicate entries once.( SOURCE AND DESTINATION)
 
 DDL & DML QUERY:
-CREATE TABLE Submissions (
- sub_id INT,
- parent_id INT
+CREATE TABLE city_distance
+(
+ distance INT,
+ source VARCHAR(512),
+ destination VARCHAR(512)
 );
-INSERT INTO Submissions (sub_id, parent_id) VALUES
-(1, NULL),
-(2, NULL),
-(1, NULL),
-(12, NULL),
-(3, 1),
-(5, 2),
-(3, 1),
-(4, 1),
-(9, 1),
-(10, 2),
-(6, 7);
+INSERT INTO city_distance(distance, source, destination) VALUES ('100', 'New Delhi', 'Panipat');
+INSERT INTO city_distance(distance, source, destination) VALUES ('200', 'Ambala', 'New Delhi');
+INSERT INTO city_distance(distance, source, destination) VALUES ('150', 'Bangalore', 'Mysore');
+INSERT INTO city_distance(distance, source, destination) VALUES ('150', 'Mysore', 'Bangalore');
+INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Mumbai', 'Pune');
+INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Pune', 'Mumbai');
+INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Jammu', 'Srinagar');
+INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Srinagar', 'Jammu');
+INSERT INTO city_distance(distance, source, destination) VALUES ('2500', 'Chennai', 'Bhopal');
+INSERT INTO city_distance(distance, source, destination) VALUES ('2500', 'Bhopal', 'Chennai');
+INSERT INTO city_distance(distance, source, destination) VALUES ('60', 'Tirupati', 'Tirumala');
+INSERT INTO city_distance(distance, source, destination) VALUES ('80', 'Tirumala', 'Tirupati');
 
 INPUT:
 
-+-----------+--------------+
-| sub_id    | parent_id    |
-+-----------+--------------+
-| 1         | null         |
-| 2         | null         |
-| 1         | null         |
-| 12        | null         |
-| 3         | 1            |
-| 5         | 2            |
-| 3         | 1            |
-| 4         | 1            |
-| 9         | 1            |
-| 10        | 2            |
-| 6         | 7            |
-+-----------+--------------+
-
++-----------+-----------+-------------+
+| distance  | source    | destination |
++-----------+-----------+-------------+
+| 100       | New Delhi | Panipat     |
+| 200       | Ambala    | New Delhi   |
+| 150       | Bangalore | Mysore      |
+| 150       | Mysore    | Bangalore   |
+| 250       | Mumbai    | Pune        |
+| 250       | Pune      | Mumbai      |
+| 250       | Jammu     | Srinagar    |
+| 250       | Srinagar  | Jammu      |
+| 2500      | Chennai   | Bhopal      |
+| 2500      | Bhopal    | Chennai     |
+| 60        | Tirupati  | Tirumala    |
+| 80        | Tirumala  | Tirupati    |
++-----------+-----------+-------------+
 
 output:
 
-+-----------+------------------+
-| post_id    | no_of_comments   |
-+-----------+------------------+
-| 1          | 3                |
-| 2          | 2                |
-| 12         | 0                |
-+-----------+------------------+
++-----------+-----------+-------------+
+| distance  | source    | destination |
++-----------+-----------+-------------+
+| 100       | New Delhi | Panipat     |
+| 200       | Ambala    | New Delhi   |
+| 150       | Bangalore | Mysore      |
+| 250       | Mumbai    | Pune        |
+| 250       | Jammu     | Srinagar    |
+| 2500      | Chennai   | Bhopal      |
+| 60        | Tirupati  | Tirumala    |
+| 80        | Tirumala  | Tirupati    |
++-----------+-----------+-------------+

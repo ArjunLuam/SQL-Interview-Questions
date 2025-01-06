@@ -1,40 +1,22 @@
-𝐌𝐮𝐬𝐭 𝐓𝐫𝐲: Amazon (Hard Level) hashtag#SQL Interview Question — Solution
+Write query to find cities where not even a single order was return.
 
-You are given the table with titles of recipes from a cookbook and their page numbers. You are asked to represent how the recipes will be distributed in the book.
+DDL & DML QUERY:
+create table city_orders
+(
+order_id int,
+city varchar(10),
+sales int
+);
 
-Produce a table consisting of three columns: left_page_number, left_title and right_title. The k-th row (counting from 0), should contain the number and the title of the page with the number 2×k in the first and second columns respectively, and the title of the page with the number 2×k+1 in the third column.
+create table city_returns
+(
+order_id int,
+return_reason varchar(20)
+);
 
-Each page contains at most 1 recipe. If the page does not contain a recipe, the appropriate cell should remain empty (NULL value). Page 0 (the internal side of the front cover) is guaranteed to be empty.
-
-Trust me, this one will surely challenge you.
-
-
-CREATE TABLE cookbook_titles (page_number INT PRIMARY KEY,title VARCHAR(255));
-
-INSERT INTO cookbook_titles (page_number, title) VALUES (1, 'Scrambled eggs'), (2, 'Fondue'), (3, 'Sandwich'), (4, 'Tomato soup'), (6, 'Liver'), (11, 'Fried duck'), (12, 'Boiled duck'), (15, 'Baked chicken');
-
-
-input :
-+-----------+--------------+
-|page_number|         title|
-+-----------+--------------+
-|          1|Scrambled eggs|
-|          2|        Fondue|
-|          3|      Sandwich|
-|          4|   Tomato soup|
-|          6|         Liver|
-|         11|    Fried duck|
-|         12|   Boiled duck|
-|         15| Baked chicken|
-+-----------+--------------+
-
-
-output:
-+---------+-----------+-----------+
-|left_page| left_title|right_title|
-+---------+-----------+-----------+
-|        2|     Fondue|   Sandwich|
-|        4|Tomato soup|       null|
-|        6|      Liver|       null|
-|       12|Boiled duck|       null|
-+---------+-----------+-----------+
+insert into city_orders
+values(1, 'Mysore' , 100),(2, 'Mysore' , 200),(3, 'Bangalore' , 250),(4, 'Bangalore' , 150)
+,(5, 'Mumbai' , 300),(6, 'Mumbai' , 500),(7, 'Mumbai' , 800)
+;
+insert into city_returns values
+(3,'wrong item'),(6,'bad quality'),(7,'wrong item');

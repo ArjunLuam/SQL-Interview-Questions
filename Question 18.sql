@@ -1,56 +1,47 @@
-You are given three tables: orders, users, and items.
+Find total number of message exchanged between 2 person each day.
 
-The orders table contains information about the orders placed on an e-commerce website, including the order_id, order_date, item_id, buyer_id, and seller_id.
+DDL & DML query:
 
-The users table contains information about the users of the e-commerce website, including the user_id and favorite_brand.
+ CREATE TABLE subscriber (
+ sms_date date ,
+ sender varchar(20) ,
+ receiver varchar(20) ,
+ sms_no int
+);
+-- insert some values
+INSERT INTO subscriber VALUES ('2020-4-1', 'Avinash', 'Vibhor',10);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Avinash',20);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Avinash', 'Pawan',30);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Pawan', 'Avinash',20);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Pawan',5);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Pawan', 'Vibhor',8);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Deepak',50);
+Input Table:
+sms_date sender receiver sms_no
+2020-04-01 Avinash Vibhor 10
+2020-04-01 Vibhor Avinash 20
+2020-04-01 Avinash Pawan 30
+2020-04-01 Pawan Avinash 20
+2020-04-01 Vibhor Pawan 5
+2020-04-01 Pawan Vibhor 8
+2020-04-01 Vibhor Deepak 50
 
-The items table contains information about the items sold on the e-commerce website, including the item_id and item_brand.
+Output Table:
+sms_date sender receiver total_sms
+2020-04-01 Avinash Vibhor 30
+2020-04-01 Avinash Pawan 50
+2020-04-01 Pawan Vibhor 13
+2020-04-01 Deepak Vibhor 50
 
-You need to write an SQL query to find for each seller whether the brand of the second item they sold is their favorite brand or not. 
-If a seller sold less than two items, report the answer for that seller as "No".
+SOLUTION:
 
-create table users1 (
-user_id         int     ,
- join_date       date    ,
- favorite_brand  varchar(50));
-
- create table orders (
- order_id       int     ,
- order_date     date    ,
- item_id        int     ,
- buyer_id       int     ,
- seller_id      int 
- );
-
- create table items
- (
- item_id        int     ,
- item_brand     varchar(50)
- );
-
-
- insert into users1 values (1,'2019-01-01','Lenovo'),(2,'2019-02-09','Samsung'),(3,'2019-01-19','LG'),(4,'2019-05-21','HP');
-
- insert into items values (1,'Samsung'),(2,'Lenovo'),(3,'LG'),(4,'HP');
-
- insert into orders values (1,'2019-08-01',4,1,2),(2,'2019-08-02',2,1,3),(3,'2019-08-03',3,2,3),(4,'2019-08-04',1,4,2)
- ,(5,'2019-08-04',1,3,4),(6,'2019-08-05',2,2,4);
-
-
-SAMPLE output:
-
-sno	user_id      order_id   order_date item_id  buyer_id  seller_id     item_brand  favorite_brand  fav_brand
-1		2			4		2019-08-04	1		4			2			Samsung		Samsung			YES
-2		3			3		2019-08-03	3		2			3			LG			LG				YES
-3		4			6		2019-08-05	2		2			4			Lenovo		HP				NO
-4		1			null	null		null	null		null		null		Lenovo			NO
-
-
-
-
-
-
-
-
-
-
+with t1 as(
+SELECT 
+        s.sms_date, 
+        LEAST(s.sender, s.receiver) AS sender, 
+        GREATEST(s.sender, s.receiver) AS receiver, 
+        s.sms_no 
+    FROM 
+        subscriber s 
+)
+select sms_date,sender,receiver,sum(sms_no) from t1 group by sms_date,sender,receiver

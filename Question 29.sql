@@ -1,55 +1,28 @@
-Identify passengers with more than 10 flights from the same airport since last 1 year from current date.
+Convert the first letter of each word found in content_text to uppercase, 
+while keeping the rest of the letters lowercase. Your output should include the original text in one column and the modified text in another column.
 
-DDL & DML QUERY:
-CREATE TABLE passenger_flights (
- Passenger_id VARCHAR(10),
- Flight_id VARCHAR(10),
- Departure_date DATE
-);
+𝐒𝐜𝐡𝐞𝐦𝐚 𝐚𝐧𝐝 𝐃𝐚𝐭𝐚𝐬𝐞𝐭:
+CREATE TABLE user_content (content_id INT PRIMARY KEY,customer_id INT,content_type VARCHAR(50),content_text VARCHAR(255));
 
-CREATE TABLE flight_details (
- Flight_id VARCHAR(10) PRIMARY KEY,
- Departure_airport_code VARCHAR(5),
- Arrival_airport_code VARCHAR(5)
-);
--- Sample data for passenger_flights
-INSERT INTO passenger_flights (Passenger_id, Flight_id, Departure_date) VALUES
-('P001', 'F101', '2023-11-01'),
-('P001', 'F102', '2023-12-02'),
-('P001', 'F103', '2024-01-10'),
-('P001', 'F104', '2024-02-15'),
-('P001', 'F105', '2024-03-05'),
-('P001', 'F106', '2024-04-18'),
-('P001', 'F107', '2024-05-22'),
-('P001', 'F108', '2024-06-30'),
-('P001', 'F109', '2024-07-15'),
-('P001', 'F110', '2024-08-05'),
-('P001', 'F111', '2024-09-10'), 
-('P002', 'F112', '2023-11-05'),
-('P002', 'F113', '2024-01-18'),
-('P002', 'F114', '2024-03-28'),
-('P002', 'F115', '2024-05-30'),
-('P003', 'F116', '2023-10-25'),
-('P003', 'F117', '2024-01-19'),
-('P003', 'F118', '2024-04-15');
+INSERT INTO user_content (content_id, customer_id, content_type, content_text) VALUES(1, 2, 'comment', 'hello world! this is a TEST.'),(2, 8, 'comment', 'what a great day'),
+(3, 4, 'comment', 'WELCOME to the event.'),(4, 2, 'comment', 'e-commerce is booming.'),(5, 6, 'comment', 'Python is fun!!'),(6, 6, 'review', '123 numbers in text.'),
+(7, 10, 'review', 'special chars: @#$$%^&*()'),(8, 4, 'comment', 'multiple CAPITALS here.'),(9, 6, 'review', 'sentence. and ANOTHER sentence!'),(10, 2, 'post', 'goodBYE!');
 
--- Sample data for flight_details
-INSERT INTO flight_details (Flight_id, Departure_airport_code, Arrival_airport_code) VALUES
-('F101', 'JFK', 'LAX'),
-('F102', 'JFK', 'ORD'),
-('F103', 'JFK', 'ATL'),
-('F104', 'JFK', 'LAX'),
-('F105', 'JFK', 'SEA'),
-('F106', 'JFK', 'MIA'),
-('F107', 'JFK', 'DFW'),
-('F108', 'JFK', 'SFO'),
-('F109', 'JFK', 'LAS'),
-('F110', 'JFK', 'BOS'),
-('F111', 'JFK', 'DEN'), 
-('F112', 'ORD', 'SFO'),
-('F113', 'ORD', 'LAX'),
-('F114', 'ORD', 'MIA'),
-('F115', 'ORD', 'DFW'),
-('F116', 'ATL', 'SEA'),
-('F117', 'ATL', 'ORD'),
-('F118', 'ATL', 'LAX');
+
+input & output:
+
+last column is the output
++-------------+-------------+--------------+------------------------+-------------------------------------+
+| content_id | customer_id | content_type | content_text            | capitalized_content                |
++-------------+-------------+--------------+------------------------+-------------------------------------+
+| 1           | 1           | comment      | hello world! this is a TEST. | Hello World! This Is A Test.       |
+| 2           | 2           | comment      | what a great day        | What A Great Day                    |
+| 3           | 3           | comment      | WELCOME to the event.    | Welcome To The Event.              |
+| 4           | 4           | comment      | e-commerce is booming.   | E-commerce Is Booming.             |
+| 5           | 5           | comment      | Python is fun!!          | Python Is Fun!!                    |
+| 6           | 6           | review       | 123 numbers in text.     | 123 Numbers In Text.               |
+| 7           | 7           | review       | special chars: @#$$%^&*() | Special Chars: @#$$%^&*()           |
+| 8           | 8           | comment      | multiple CAPITALS here.  | Multiple Capitals Here.            |
+| 9           | 9           | review       | sentence. and ANOTHER sentence! | Sentence. And Another Sentence!   |
+| 10          | 10          | post         | goodBYE!                 | Goodbye!                           |
++-------------+-------------+--------------+------------------------+-------------------------------------+

@@ -1,31 +1,29 @@
-𝐅𝐢𝐧𝐝 𝐭𝐡𝐞 𝐨𝐫𝐢𝐠𝐢𝐧 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐝𝐞𝐬𝐭𝐢𝐧𝐚𝐭𝐢𝐨𝐧 𝐨𝐟 𝐞𝐚𝐜𝐡 𝐜𝐮𝐬𝐭𝐨𝐦𝐞𝐫 ?
+Find number of new customers visited the site per day
+on day 1 everyone is the new customer so 3 new customers joined on day 1 while on day 2 
+100 was old customer so 2 customers joined on day 2
 
-Note : There can be more than 1 stops for the same customer journey.
-
-CREATE TABLE flights_data (
-    cust_id INT,
-    flight_id VARCHAR(20),
-    origin VARCHAR(50),
-    destination VARCHAR(50)
+create table customer_orders (
+order_id integer,
+customer_id integer,
+order_date date,
+order_amount integer
 );
+select * from customer_orders;
+INSERT INTO customer_orders (order_id, customer_id, order_date, order_amount) VALUES
+(1, 100, CAST('2022-01-01' AS DATE), 2000),
+(2, 200, CAST('2022-01-01' AS DATE), 2500),
+(3, 300, CAST('2022-01-01' AS DATE), 2100),
+(4, 100, CAST('2022-01-02' AS DATE), 2000),
+(5, 400, CAST('2022-01-02' AS DATE), 2200),
+(6, 500, CAST('2022-01-02' AS DATE), 2700),
+(7, 100, CAST('2022-01-03' AS DATE), 3000),
+(8, 400, CAST('2022-01-03' AS DATE), 1000),
+(9, 600, CAST('2022-01-03' AS DATE), 3000);
 
 
-INSERT INTO flights_data (cust_id, flight_id, origin, destination) VALUES
-(1, 'Flight1', 'Delhi', 'Hyderabad'),
-(1, 'Flight2', 'Hyderabad', 'Kochi'),
-(1, 'Flight3', 'Kochi', 'Mangalore'),
-(2, 'Flight1', 'Mumbai', 'Ayodhya'),
-(2, 'Flight2', 'Ayodhya', 'Gorakhpur');
+OUTPUT:
+	order_date	sum
 
-INPUT:
-cust_id	flight_id	origin	destination
-1		flight1		Delhi	Hyderabad
-1		flight2		Hyderabad	Kochi
-1		flight3		Kochi	Mangalore
-2		flight1		Mumbai	Ayodhya
-2		flight2		Ayodhya	Gorakhpur
-
-output:
-cust_id	origin	destination
-1	Delhi	Mangalore
-2	Mumbai	Gorakhpur
+1	2022-01-01	3
+2	2022-01-02	2
+3	2022-01-03	1

@@ -1,47 +1,48 @@
-Find total number of message exchanged between 2 person each day.
+You are provided with data about players performances in a football tournament. 
+Write a query to find the top assist provider for each team in the tournament, along with their total number of assists.
 
-DDL & DML query:
 
- CREATE TABLE subscriber (
- sms_date date ,
- sender varchar(20) ,
- receiver varchar(20) ,
- sms_no int
+CREATE TABLE football_stats (
+    match_id INT,
+    team_name VARCHAR(50),
+    player_name VARCHAR(50),
+    goals_scored INT,
+    assists INT
 );
--- insert some values
-INSERT INTO subscriber VALUES ('2020-4-1', 'Avinash', 'Vibhor',10);
-INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Avinash',20);
-INSERT INTO subscriber VALUES ('2020-4-1', 'Avinash', 'Pawan',30);
-INSERT INTO subscriber VALUES ('2020-4-1', 'Pawan', 'Avinash',20);
-INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Pawan',5);
-INSERT INTO subscriber VALUES ('2020-4-1', 'Pawan', 'Vibhor',8);
-INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Deepak',50);
-Input Table:
-sms_date sender receiver sms_no
-2020-04-01 Avinash Vibhor 10
-2020-04-01 Vibhor Avinash 20
-2020-04-01 Avinash Pawan 30
-2020-04-01 Pawan Avinash 20
-2020-04-01 Vibhor Pawan 5
-2020-04-01 Pawan Vibhor 8
-2020-04-01 Vibhor Deepak 50
 
-Output Table:
-sms_date sender receiver total_sms
-2020-04-01 Avinash Vibhor 30
-2020-04-01 Avinash Pawan 50
-2020-04-01 Pawan Vibhor 13
-2020-04-01 Deepak Vibhor 50
+INSERT INTO football_stats (match_id, team_name, player_name, goals_scored, assists) VALUES
+(1, 'Manchester United', 'Bruno Fernandes', 1, 2),
+(1, 'Manchester United', 'Marcus Rashford', 2, 1),
+(1, 'Chelsea', 'Mason Mount', 1, 2),
+(1, 'Chelsea', 'Kai Havertz', 1, 0),
+(2, 'Manchester United', 'Christian Eriksen', 0, 3),
+(2, 'Manchester United', 'Antony', 1, 1),
+(2, 'Chelsea', 'Reece James', 0, 1),
+(2, 'Chelsea', 'Raheem Sterling', 1, 2),
+(3, 'Manchester United', 'Bruno Fernandes', 2, 1),
+(3, 'Chelsea', 'Mason Mount', 2, 1),
+(3, 'Chelsea', 'Kai Havertz', 1, 0),
+(3, 'Manchester United', 'Marcus Rashford', 1, 0);
 
-SOLUTION:
 
-with t1 as(
-SELECT 
-        s.sms_date, 
-        LEAST(s.sender, s.receiver) AS sender, 
-        GREATEST(s.sender, s.receiver) AS receiver, 
-        s.sms_no 
-    FROM 
-        subscriber s 
-)
-select sms_date,sender,receiver,sum(sms_no) from t1 group by sms_date,sender,receiver
++----------+-----------------+--------------+-------------+---------+
+| Match_ID |    Team_Name    | Player_Name  | Goals_Scored | Assists |
++==========+=================+==============+=============+=========+
+|    1     |Manchester United|Bruno Fernandes|      1      |    2    |
+|    1     |Manchester United|Marcus Rashford|      2      |    1    |
+|    1     |     Chelsea     | Mason Mount   |      1      |    2    |
+|    1     |     Chelsea     |  Kai Havertz  |      1      |    0    |
+|    2     |Manchester United|Christian Eriksen|      0      |    3    | 
+|    2     |Manchester United|     Antony    |      1      |    1    |
+|    2     |     Chelsea     |  Reece James  |      0      |    1    |
+|    2     |     Chelsea     |Raheem Sterling|      1      |    2    |
+|    3     |Manchester United|Bruno Fernandes|      2      |    1    |
+|    3     |     Chelsea     | Mason Mount   |      2      |    1    |
+|    3     |     Chelsea     |  Kai Havertz  |      1      |    0    |
+|    3     |Manchester United|Marcus Rashford|      1      |    0    |
++----------+-----------------+--------------+-------------+---------+ 
+
+Team_Name			Top_Assist_Provider	Total_Assists
+Manchester United	Christian Eriksen	3
+Chelsea				Mason Mount			3
+

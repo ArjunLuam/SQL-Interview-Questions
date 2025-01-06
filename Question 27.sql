@@ -1,28 +1,40 @@
-Given the customer_purchases and product_list tables, Write a query to calculate the year-over-year growth rate of the amount spent by each customer.
+𝐌𝐮𝐬𝐭 𝐓𝐫𝐲: Amazon (Hard Level) hashtag#SQL Interview Question — Solution
 
-Table structure:
+You are given the table with titles of recipes from a cookbook and their page numbers. You are asked to represent how the recipes will be distributed in the book.
 
-CREATE TABLE customer_purchases ( Customer_id VARCHAR, Product_id VARCHAR, Purchase_amount DECIMAL(10,2), Purchase_date DATE );
+Produce a table consisting of three columns: left_page_number, left_title and right_title. The k-th row (counting from 0), should contain the number and the title of the page with the number 2×k in the first and second columns respectively, and the title of the page with the number 2×k+1 in the third column.
 
-input:
+Each page contains at most 1 recipe. If the page does not contain a recipe, the appropriate cell should remain empty (NULL value). Page 0 (the internal side of the front cover) is guaranteed to be empty.
 
-+------------+-------------+-----------------+---------------+
-| Customer_id | Product_id  | Purchase_amount | Purchase_date |
-+------------+-------------+-----------------+---------------+
-| C001        | P001        | 100.50          | 2022-05-15   |
-| C002        | P002        | 200.75          | 2022-08-20   |
-| C001        | P003        | 150.00          | 2023-05-15   |
-| C002        | P004        | 300.25          | 2023-08-20   |
-| C003        | P001        | 120.00          | 2022-07-10   |
-| C003        | P002        | 180.00          | 2023-07-10   |
-+------------+-------------+-----------------+---------------+
+Trust me, this one will surely challenge you.
+
+
+CREATE TABLE cookbook_titles (page_number INT PRIMARY KEY,title VARCHAR(255));
+
+INSERT INTO cookbook_titles (page_number, title) VALUES (1, 'Scrambled eggs'), (2, 'Fondue'), (3, 'Sandwich'), (4, 'Tomato soup'), (6, 'Liver'), (11, 'Fried duck'), (12, 'Boiled duck'), (15, 'Baked chicken');
+
+
+input :
++-----------+--------------+
+|page_number|         title|
++-----------+--------------+
+|          1|Scrambled eggs|
+|          2|        Fondue|
+|          3|      Sandwich|
+|          4|   Tomato soup|
+|          6|         Liver|
+|         11|    Fried duck|
+|         12|   Boiled duck|
+|         15| Baked chicken|
++-----------+--------------+
+
 
 output:
-
-+------------+-------------+-----------------+---------------+------+-------------------+
-| Customer_id | Product_id  | Purchase_amount | Purchase_date | Diff | Yoy_Growth        |
-+------------+-------------+-----------------+---------------+------+-------------------+
-| C001        | P003        | 150.00          | 2023-05-15   | 49.50 | 33.00000000000000  |
-| C002        | P004        | 300.25          | 2023-08-20   | 99.50 | 33.1390507910075   |
-| C003        | P002        | 180.00          | 2023-07-10   | 60.00 | 33.3333333333333   |
-+------------+-------------+-----------------+---------------+------+-------------------+
++---------+-----------+-----------+
+|left_page| left_title|right_title|
++---------+-----------+-----------+
+|        2|     Fondue|   Sandwich|
+|        4|Tomato soup|       null|
+|        6|      Liver|       null|
+|       12|Boiled duck|       null|
++---------+-----------+-----------+

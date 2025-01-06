@@ -1,40 +1,47 @@
-There is an e-commerce website that has both a mobile app and a desktop website. 
-The spending history of the users is given, which includes the spend date, user ID, platform (mobile or desktop), and amount spent.
+Several friends at a cinema ticket office would like to reserve consecutive available seats.
+query all the consecutive seats order by the seat_id using the following cinema table
 
-The question is to write an SQL query to find the total number of users and
-the total amount spent using mobile only, desktop only, and both mobile and desktop together for each date.
-
-INPUT:
-
-| user_id | spend_date | platform | amount |
-|---|---|---|---|
-| 1 | 2019-07-01 | mobile | 100 |
-| 1 | 2019-07-01 | desktop | 100 |
-| 2 | 2019-07-01 | mobile | 100 |
-| 2 | 2019-07-02 | mobile | 100 |
-| 3 | 2019-07-01 | desktop | 100 |
-| 3 | 2019-07-02 | desktop | 100  |
-
-OUTPUT:
-
-| spend_date | amount | platform | total_users |
-|---|---|---|---|
-| 2019-07-01 | 200 | both 		| 1 |
-| 2019-07-01 | 100 | desktop 	| 1 |
-| 2019-07-01 | 100 | mobile 	| 1 |
-| 2019-07-02 | 0   | both 		| 0 |
-| 2019-07-02 | 100 | desktop 	| 1 |
-| 2019-07-02 | 100 | mobile 	| 1 |
-
-Query:
-
-create table spending 
-(
-user_id int,
-spend_date date,
-platform varchar(10),
-amount int
+DDL & DML QUERIES:
+CREATE TABLE cinema (
+ seat_id INT PRIMARY KEY,
+ free int
 );
+delete from cinema;
+INSERT INTO cinema (seat_id, free) VALUES (1, 1);
+INSERT INTO cinema (seat_id, free) VALUES (2, 0);
+INSERT INTO cinema (seat_id, free) VALUES (3, 1);
+INSERT INTO cinema (seat_id, free) VALUES (4, 1);
+INSERT INTO cinema (seat_id, free) VALUES (5, 1);
+INSERT INTO cinema (seat_id, free) VALUES (6, 0);
+INSERT INTO cinema (seat_id, free) VALUES (7, 1);
+INSERT INTO cinema (seat_id, free) VALUES (8, 1);
+INSERT INTO cinema (seat_id, free) VALUES (9, 0);
+INSERT INTO cinema (seat_id, free) VALUES (10, 1);
+INSERT INTO cinema (seat_id, free) VALUES (11, 0);
+INSERT INTO cinema (seat_id, free) VALUES (12, 1);
+INSERT INTO cinema (seat_id, free) VALUES (13, 0);
+INSERT INTO cinema (seat_id, free) VALUES (14, 1);
+INSERT INTO cinema (seat_id, free) VALUES (15, 1);
+INSERT INTO cinema (seat_id, free) VALUES (16, 0);
+INSERT INTO cinema (seat_id, free) VALUES (17, 1);
+INSERT INTO cinema (seat_id, free) VALUES (18, 1);
+INSERT INTO cinema (seat_id, free) VALUES (19, 1);
+INSERT INTO cinema (seat_id, free) VALUES (20, 1);
 
-insert into spending values(1,'2019-07-01','mobile',100),(1,'2019-07-01','desktop',100),(2,'2019-07-01','mobile',100)
-,(2,'2019-07-02','mobile',100),(3,'2019-07-01','desktop',100),(3,'2019-07-02','desktop',100);
+
+Output :
+
+Sno	seat_id
+1	3
+2	4
+3	5
+4	7
+5	8
+6	14
+7	15
+8	17
+9	18
+10	19
+11	20
+
+

@@ -1,47 +1,62 @@
-Several friends at a cinema ticket office would like to reserve consecutive available seats.
-query all the consecutive seats order by the seat_id using the following cinema table
+correcting a swapping error in Zomato's order database. Imagine each order's item has been mistakenly swapped with the next
+Script -- 
 
-DDL & DML QUERIES:
-CREATE TABLE cinema (
- seat_id INT PRIMARY KEY,
- free int
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    item VARCHAR(255) NOT NULL
 );
-delete from cinema;
-INSERT INTO cinema (seat_id, free) VALUES (1, 1);
-INSERT INTO cinema (seat_id, free) VALUES (2, 0);
-INSERT INTO cinema (seat_id, free) VALUES (3, 1);
-INSERT INTO cinema (seat_id, free) VALUES (4, 1);
-INSERT INTO cinema (seat_id, free) VALUES (5, 1);
-INSERT INTO cinema (seat_id, free) VALUES (6, 0);
-INSERT INTO cinema (seat_id, free) VALUES (7, 1);
-INSERT INTO cinema (seat_id, free) VALUES (8, 1);
-INSERT INTO cinema (seat_id, free) VALUES (9, 0);
-INSERT INTO cinema (seat_id, free) VALUES (10, 1);
-INSERT INTO cinema (seat_id, free) VALUES (11, 0);
-INSERT INTO cinema (seat_id, free) VALUES (12, 1);
-INSERT INTO cinema (seat_id, free) VALUES (13, 0);
-INSERT INTO cinema (seat_id, free) VALUES (14, 1);
-INSERT INTO cinema (seat_id, free) VALUES (15, 1);
-INSERT INTO cinema (seat_id, free) VALUES (16, 0);
-INSERT INTO cinema (seat_id, free) VALUES (17, 1);
-INSERT INTO cinema (seat_id, free) VALUES (18, 1);
-INSERT INTO cinema (seat_id, free) VALUES (19, 1);
-INSERT INTO cinema (seat_id, free) VALUES (20, 1);
+
+INSERT INTO orders (order_id, item) VALUES
+(1, 'Chow Mein'),
+(2, 'Pizza'),
+(3, 'Veg Nuggets'),
+(4, 'Paneer Butter Masala'),
+(5, 'Spring Rolls'),
+(6, 'Veg Burger'),
+(7, 'Paneer Tikka');
 
 
-Output :
 
-Sno	seat_id
-1	3
-2	4
-3	5
-4	7
-5	8
-6	14
-7	15
-8	17
-9	18
-10	19
-11	20
+Input Table: Orders
+
++----------+--------------------+
+| order_id | item               |
++==========+====================+
+| 1        | Chow Mein          |
+| 2        | Pizza              |
+| 3        | Veg Nuggets        |
+| 4        | Paneer Butter Masala |
+| 5        | Spring Rolls       |
+| 6        | Veg Burger         |
+| 7        | Paneer Tikka       |
++==========+====================+
 
 
+Input Table: Orders
+
++----------+--------------------+
+| order_id | item               |
++==========+====================+
+| 1        | Chow Mein          |
+| 2        | Pizza              |
+| 3        | Veg Nuggets        |
+| 4        | Paneer Butter Masala |
+| 5        | Spring Rolls       |
+| 6        | Veg Burger         |
+| 7        | Paneer Tikka       |
++==========+====================+
+
+
+Output Table: Orders
+
++--------------------+--------------------+
+| corrected_order_id | item               |
++====================+====================+
+| 1                  | Pizza              |
+| 2                  | Chow Mein          |
+| 3                  | Paneer Butter Masala |
+| 4                  | Veg Nuggets        |
+| 5                  | Veg Burger         |
+| 6                  | Spring Rolls       |
+| 7                  | Paneer Tikka       |
++====================+====================+

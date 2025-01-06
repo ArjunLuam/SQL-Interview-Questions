@@ -1,48 +1,53 @@
-Find all the users who were active for 3 consecutive days or more.
+Note: parent_id is null for posts.
+parent_id for comments is sub_id for another post in the table.
+Write an sql query to find the number of comments per post.
+Result table should contain post_id and its corresponding number_of_comments, and must be sorted by post_id in ascending order.
+--> Submissions may contain duplicate comments. You should count the number of unique comments per post.
+--> Submissions may contain duplicate posts. You should treat them as one post.
+
+DDL & DML QUERY:
+CREATE TABLE Submissions (
+ sub_id INT,
+ parent_id INT
+);
+INSERT INTO Submissions (sub_id, parent_id) VALUES
+(1, NULL),
+(2, NULL),
+(1, NULL),
+(12, NULL),
+(3, 1),
+(5, 2),
+(3, 1),
+(4, 1),
+(9, 1),
+(10, 2),
+(6, 7);
+
+INPUT:
+
++-----------+--------------+
+| sub_id    | parent_id    |
++-----------+--------------+
+| 1         | null         |
+| 2         | null         |
+| 1         | null         |
+| 12        | null         |
+| 3         | 1            |
+| 5         | 2            |
+| 3         | 1            |
+| 4         | 1            |
+| 9         | 1            |
+| 10        | 2            |
+| 6         | 7            |
++-----------+--------------+
 
 
-CREATE TABLE sf_events (date DATETIME,account_id VARCHAR(10),user_id VARCHAR(10));
+output:
 
-INSERT INTO sf_events (date, account_id, user_id) 
-VALUES('2021-01-01', 'A1', 'U1'),('2021-01-01', 'A1', 'U2'),('2021-01-06', 'A1', 'U3'),
-('2021-01-02', 'A1', 'U1'),('2020-12-24', 'A1', 'U2'),('2020-12-08', 'A1', 'U1'),
-('2020-12-09', 'A1', 'U1'),('2021-01-10', 'A2', 'U4'),('2021-01-11', 'A2', 'U4'),(
-'2021-01-12', 'A2', 'U4'),('2021-01-15', 'A2', 'U5'),('2020-12-17', 'A2', 'U4'),(
-'2020-12-25', 'A3', 'U6'),('2020-12-25', 'A3', 'U6'),('2020-12-25', 'A3', 'U6'),
-('2020-12-06', 'A3', 'U7'),('2020-12-06', 'A3', 'U6'),('2021-01-14', 'A3', 'U6'),
-('2021-02-07', 'A1', 'U1'),('2021-02-10', 'A1', 'U2'),('2021-02-01', 'A2', 'U4'),(
-'2021-02-01', 'A2', 'U5'),('2020-12-05', 'A1', 'U8');
-
-
-INPUT TABLES
-
-+----+---------------------+------------+-------+
-| id | date                | account_id | user  |
-+----+---------------------+------------+-------+
-| 1  | 2020-12-08 00:00:00 | A1         | U1    |
-| 2  | 2020-12-09 00:00:00 | A1         | U1    |
-| 3  | 2021-01-01 00:00:00 | A1         | U1    |
-| 4  | 2021-02-07 00:00:00 | A1         | U1    |
-| 5  | 2021-01-02 00:00:00 | A1         | U1    |
-| 6  | 2020-12-24 00:00:00 | A1         | U2    |
-| 7  | 2021-02-10 00:00:00 | A1         | U2    |
-| 8  | 2021-01-01 00:00:00 | A1         | U2    |
-| 9  | 2021-01-06 00:00:00 | A1         | U3    |
-| 10 | 2020-12-17 00:00:00 | A2         | U4    |
-| 11 | 2021-01-10 00:00:00 | A2         | U4    |
-| 12 | 2021-01-11 00:00:00 | A2         | U4    |
-| 13 | 2021-01-12 00:00:00 | A2         | U4    |
-| 14 | 2021-02-01 00:00:00 | A2         | U4    |
-| 15 | 2021-02-01 00:00:00 | A2         | U5    |
-| 16 | 2021-01-15 00:00:00 | A2         | U5    |
-| 17 | 2021-01-14 00:00:00 | A3         | U6    |
-| 18 | 2020-12-25 00:00:00 | A3         | U6    |
-| 19 | 2020-12-25 00:00:00 | A3         | U6    |
-| 20 | 2020-12-06 00:00:00 | A3         | U6    |
-| 21 | 2020-12-25 00:00:00 | A3         | U6    |
-| 22 | 2020-12-06 00:00:00 | A3         | U7    |
-| 23 | 2020-12-05 00:00:00 | A1         | U8    |
-+----+---------------------+------------+-------+
-
-
-
++-----------+------------------+
+| post_id    | no_of_comments   |
++-----------+------------------+
+| 1          | 3                |
+| 2          | 2                |
+| 12         | 0                |
++-----------+------------------+

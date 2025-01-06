@@ -1,50 +1,31 @@
-You are given two tables: players and matches.
+𝐅𝐢𝐧𝐝 𝐭𝐡𝐞 𝐨𝐫𝐢𝐠𝐢𝐧 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐝𝐞𝐬𝐭𝐢𝐧𝐚𝐭𝐢𝐨𝐧 𝐨𝐟 𝐞𝐚𝐜𝐡 𝐜𝐮𝐬𝐭𝐨𝐦𝐞𝐫 ?
 
-The players table contains information about the players, including their player_id and group_id.
+Note : There can be more than 1 stops for the same customer journey.
 
-The matches table contains information about the matches played between players, including the match_id, player1_id, player2_id, player1_score, and player2_score.
-
-You need to write an SQL query to find the winner in each group. The winner is the player who scored the maximum total points within the group. In case of a tie, the player with the lowest player_id wins.
-
-create table players
-(player_id int,
-group_id int)
-
-insert into players values (15,1);
-insert into players values (25,1);
-insert into players values (30,1);
-insert into players values (45,1);
-insert into players values (10,2);
-insert into players values (35,2);
-insert into players values (50,2);
-insert into players values (20,3);
-insert into players values (40,3);
-
-create table matches
-(
-match_id int,
-first_player int,
-second_player int,
-first_score int,
-second_score int)
-
-insert into matches values (1,15,45,3,0);
-insert into matches values (2,30,25,1,2);
-insert into matches values (3,30,15,2,0);
-insert into matches values (4,40,20,5,2);
-insert into matches values (5,35,50,1,1);
+CREATE TABLE flights_data (
+    cust_id INT,
+    flight_id VARCHAR(20),
+    origin VARCHAR(50),
+    destination VARCHAR(50)
+);
 
 
+INSERT INTO flights_data (cust_id, flight_id, origin, destination) VALUES
+(1, 'Flight1', 'Delhi', 'Hyderabad'),
+(1, 'Flight2', 'Hyderabad', 'Kochi'),
+(1, 'Flight3', 'Kochi', 'Mangalore'),
+(2, 'Flight1', 'Mumbai', 'Ayodhya'),
+(2, 'Flight2', 'Ayodhya', 'Gorakhpur');
 
-The output should be a table with the following columns:
+INPUT:
+cust_id	flight_id	origin	destination
+1		flight1		Delhi	Hyderabad
+1		flight2		Hyderabad	Kochi
+1		flight3		Kochi	Mangalore
+2		flight1		Mumbai	Ayodhya
+2		flight2		Ayodhya	Gorakhpur
 
-group_id
-winner_player_id
-Example:
-
-group_id	winner_player_id
-1			15
-2			35
-3			45
-
-
+output:
+cust_id	origin	destination
+1	Delhi	Mangalore
+2	Mumbai	Gorakhpur

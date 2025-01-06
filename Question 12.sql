@@ -1,6 +1,17 @@
-Output the date of the nth sunday from today
+Given a table we need to find out the total number of rides by each brand and how many times brand won by delivering order fast, and how many time lost. The desired output shown below
 
-eg: today - 5-10-2024
-date after 3 sundays - 20-04-2024
+DDL & DML QUERY:
 
-No input table is required for this XD
+CREATE TABLE Delievry_Partner (
+ Brand_1 VARCHAR(512),
+ Brand_2 VARCHAR(512),
+ Brand_3 VARCHAR(512),
+ Winner VARCHAR(512)
+);
+
+INSERT INTO Delievry_Partner (Brand_1, Brand_2, Brand_3, Winner) VALUES
+ ('A', 'B', 'C', 'B'),
+ ('B', 'C', 'E', 'E'),
+ ('C', 'A', 'D', 'D'),
+ ('D', 'E', 'A', 'A'),
+ ('F', 'B', 'C', 'F');

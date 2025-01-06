@@ -1,61 +1,40 @@
-Find the Currency Exchange rate at beginning and ending of month. 
-Output should contain unique currency code (by formatting currency code and year_month of the date column), beginning exchange rate and ending exchange rate.
+There is an e-commerce website that has both a mobile app and a desktop website. 
+The spending history of the users is given, which includes the spend date, user ID, platform (mobile or desktop), and amount spent.
 
-DDL & DML QUERY:
+The question is to write an SQL query to find the total number of users and
+the total amount spent using mobile only, desktop only, and both mobile and desktop together for each date.
 
-CREATE TABLE exchange_rates (
- currency_code VARCHAR(3),
- date DATE,
- currency_exchange_rate DECIMAL(10, 2)
+INPUT:
+
+| user_id | spend_date | platform | amount |
+|---|---|---|---|
+| 1 | 2019-07-01 | mobile | 100 |
+| 1 | 2019-07-01 | desktop | 100 |
+| 2 | 2019-07-01 | mobile | 100 |
+| 2 | 2019-07-02 | mobile | 100 |
+| 3 | 2019-07-01 | desktop | 100 |
+| 3 | 2019-07-02 | desktop | 100  |
+
+OUTPUT:
+
+| spend_date | amount | platform | total_users |
+|---|---|---|---|
+| 2019-07-01 | 200 | both 		| 1 |
+| 2019-07-01 | 100 | desktop 	| 1 |
+| 2019-07-01 | 100 | mobile 	| 1 |
+| 2019-07-02 | 0   | both 		| 0 |
+| 2019-07-02 | 100 | desktop 	| 1 |
+| 2019-07-02 | 100 | mobile 	| 1 |
+
+Query:
+
+create table spending 
+(
+user_id int,
+spend_date date,
+platform varchar(10),
+amount int
 );
 
-
-INSERT INTO exchange_rates (currency_code, date, currency_exchange_rate) VALUES
-('USD', '2024-06-01', 1.20),
-('USD', '2024-06-02', 1.21),
-('USD', '2024-06-03', 1.22),
-('USD', '2024-06-04', 1.23),
-('USD', '2024-07-01', 1.25),
-('USD', '2024-07-02', 1.26),
-('USD', '2024-07-03', 1.27),
-('EUR', '2024-06-01', 1.40),
-('EUR', '2024-06-02', 1.41),
-('EUR', '2024-06-03', 1.42),
-('EUR', '2024-06-04', 1.43),
-('EUR', '2024-07-01', 1.45),
-('EUR', '2024-07-02', 1.46),
-('EUR', '2024-07-03', 1.47);
-
-
-INPUT TABLE:
-
-+--------------+------------+--------------------------+
-| currency_code |  date      | currency_exchange_rate   |
-+--------------+------------+--------------------------+
-| USD           | 2024-06-01 | 1.20                     |
-| USD           | 2024-06-02 | 1.21                     |
-| USD           | 2024-06-03 | 1.22                     |
-| USD           | 2024-06-04 | 1.23                     |
-| USD           | 2024-07-01 | 1.25                     |
-| USD           | 2024-07-02 | 1.26                     |
-| USD           | 2024-07-03 | 1.27                     |
-| EUR           | 2024-06-01 | 1.40                     |
-| EUR           | 2024-06-02 | 1.41                     |
-| EUR           | 2024-06-03 | 1.42                     |
-| EUR           | 2024-06-04 | 1.43                     |
-| EUR           | 2024-07-01 | 1.45                     |
-| EUR           | 2024-07-02 | 1.46                     |
-| EUR           | 2024-07-03 | 1.47                     |
-+--------------+------------+--------------------------+
-
-
-OUTPUT TABLE:
-
-+------------------------+-------------------+-------------------+
-| Unique_currency_code    | start_exchange_rate| end_exchange_rate|
-+------------------------+-------------------+-------------------+
-| USD-2024-7             | 1.25              | 1.27              |
-| EUR-2024-6             | 1.40              | 1.43              |
-| USD-2024-6             | 1.20              | 1.23              |
-| EUR-2024-7             | 1.45              | 1.47              |
-+------------------------+-------------------+-------------------+
+insert into spending values(1,'2019-07-01','mobile',100),(1,'2019-07-01','desktop',100),(2,'2019-07-01','mobile',100)
+,(2,'2019-07-02','mobile',100),(3,'2019-07-01','desktop',100),(3,'2019-07-02','desktop',100);

@@ -1,60 +1,42 @@
-Assign the Row number without using ROW_NUMBER() Window function.
+You are provided with data about candidates and the votes they received in an election. Write a query to find the candidate with the highest votes in each constituency.
 
-DDL & DML Query:
-
--- Create the department table
-CREATE TABLE department (
- department_id INT,
- employee_id INT,
- name VARCHAR(50)
+CREATE TABLE election_results (
+    constituency VARCHAR(50),
+    candidate_name VARCHAR(50),
+    party VARCHAR(50),
+    votes_received INT
 );
 
--- Insert data into the department table
-INSERT INTO department (department_id, employee_id, name) VALUES
-(1, 1, 'Anna'),
-(1, 2, 'Ben'),
-(2, 3, 'Charlie'),
-(2, 4, 'David'),
-(1, 5, 'Eva'),
-(3, 6, 'George'),
-(3, 7, 'John');
-Input Table:
-department_id employee_id name
-1 1 Anna
-1 2 Ben
-2 3 Charlie
-2 4 David
-1 5 Eva
-3 6 George
-3 7 John
 
-Output Table:
+INSERT INTO election_results (constituency, candidate_name, party, votes_received) VALUES
+('Constituency A', 'Alice', 'Party X', 15000),
+('Constituency A', 'Bob', 'Party Y', 12000),
+('Constituency A', 'Charlie', 'Party Z', 8000),
+('Constituency B', 'David', 'Party X', 17000),
+('Constituency B', 'Eve', 'Party Y', 20000),
+('Constituency B', 'Frank', 'Party Z', 15000),
+('Constituency C', 'Grace', 'Party X', 14000),
+('Constituency C', 'Hannah', 'Party Y', 18000),
+('Constituency C', 'Ian', 'Party Z', 12000);
 
-department_id employee_id name rn
-1 1 Anna 1
-1 2 Ben 2
-2 3 Charlie 1
-2 4 David 2
-1 5 Eva 3
-3 6 George 1
-3 7 John 2
+input:
++---------------+----------------+--------+-----------------+
+| Constituency  | Candidate_Name | Party  | Votes_Received |
++===============+================+========+=================+
+| Constituency A | Alice         | Party X | 15000          |
+| Constituency A | Bob           | Party Y | 12000          |
+| Constituency A | Charlie       | Party Z | 8000           |
+| Constituency B | David         | Party X | 17000          |
+| Constituency B | Eve           | Party Y | 20000          |
+| Constituency B | Frank         | Party Z | 15000          |
+| Constituency C | Grace         | Party X | 14000          |
+| Constituency C | Hannah        | Party Y | 18000          |
+| Constituency C | Ian           | Party Z | 12000          |
++===============+================+========+=================+
 
-SOLUTION:
-
-
-SELECT 
-    d.department_id, 
-    d.employee_id, 
-    d.name, 
-    COUNT(d1.employee_id) AS rn
-FROM 
-    department d
-INNER JOIN 
-    department d1 
-ON 
-    d.department_id = d1.department_id 
-    AND d.employee_id >= d1.employee_id
-GROUP BY 
-    d.department_id, 
-    d.employee_id, 
-    d.name ORDER BY department_id,d.employee_id;
+output:
+Output Table: top_candidates
+Constituency	Candidate_Name	Party	Votes_Received
+Constituency A	Alice			Party X	15000
+Constituency B	Eve				Party Y	20000
+Constituency C	Hannah			Party Y	18000

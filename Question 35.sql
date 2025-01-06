@@ -1,22 +1,28 @@
-Write query to find cities where not even a single order was return.
+Given the customer_purchases and product_list tables, Write a query to calculate the year-over-year growth rate of the amount spent by each customer.
 
-DDL & DML QUERY:
-create table city_orders
-(
-order_id int,
-city varchar(10),
-sales int
-);
+Table structure:
 
-create table city_returns
-(
-order_id int,
-return_reason varchar(20)
-);
+CREATE TABLE customer_purchases ( Customer_id VARCHAR, Product_id VARCHAR, Purchase_amount DECIMAL(10,2), Purchase_date DATE );
 
-insert into city_orders
-values(1, 'Mysore' , 100),(2, 'Mysore' , 200),(3, 'Bangalore' , 250),(4, 'Bangalore' , 150)
-,(5, 'Mumbai' , 300),(6, 'Mumbai' , 500),(7, 'Mumbai' , 800)
-;
-insert into city_returns values
-(3,'wrong item'),(6,'bad quality'),(7,'wrong item');
+input:
+
++------------+-------------+-----------------+---------------+
+| Customer_id | Product_id  | Purchase_amount | Purchase_date |
++------------+-------------+-----------------+---------------+
+| C001        | P001        | 100.50          | 2022-05-15   |
+| C002        | P002        | 200.75          | 2022-08-20   |
+| C001        | P003        | 150.00          | 2023-05-15   |
+| C002        | P004        | 300.25          | 2023-08-20   |
+| C003        | P001        | 120.00          | 2022-07-10   |
+| C003        | P002        | 180.00          | 2023-07-10   |
++------------+-------------+-----------------+---------------+
+
+output:
+
++------------+-------------+-----------------+---------------+------+-------------------+
+| Customer_id | Product_id  | Purchase_amount | Purchase_date | Diff | Yoy_Growth        |
++------------+-------------+-----------------+---------------+------+-------------------+
+| C001        | P003        | 150.00          | 2023-05-15   | 49.50 | 33.00000000000000  |
+| C002        | P004        | 300.25          | 2023-08-20   | 99.50 | 33.1390507910075   |
+| C003        | P002        | 180.00          | 2023-07-10   | 60.00 | 33.3333333333333   |
++------------+-------------+-----------------+---------------+------+-------------------+

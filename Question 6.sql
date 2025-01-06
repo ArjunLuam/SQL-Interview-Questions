@@ -1,17 +1,46 @@
-Given a table we need to find out the total number of rides by each brand and how many times brand won by delivering order fast, and how many time lost. The desired output shown below
 
-DDL & DML QUERY:
+SEPERATELY CLASSIFY HOW MUCH SALE HAPPENED FOR CLOTHING AND HOW MUCH Electronics
 
-CREATE TABLE Delievry_Partner (
- Brand_1 VARCHAR(512),
- Brand_2 VARCHAR(512),
- Brand_3 VARCHAR(512),
- Winner VARCHAR(512)
+
+CREATE TABLE sales_data (
+    month varchar(10),
+    category varchar(20),
+    amount numeric
 );
 
-INSERT INTO Delievry_Partner (Brand_1, Brand_2, Brand_3, Winner) VALUES
- ('A', 'B', 'C', 'B'),
- ('B', 'C', 'E', 'E'),
- ('C', 'A', 'D', 'D'),
- ('D', 'E', 'A', 'A'),
- ('F', 'B', 'C', 'F');
+-- Insert data
+INSERT INTO sales_data (month, category, amount) VALUES
+    ('January', 'Electronics', 1500),
+    ('January', 'Clothing', 1200),
+    ('February', 'Electronics', 1800),
+    ('February', 'Clothing', 1300),
+    ('March', 'Electronics', 1600),
+    ('March', 'Clothing', 1100),
+    ('April', 'Electronics', 1700),
+    ('April', 'Clothing', 1400);
+	
+	
+input table :
+
++----------+-----------+-------+
+| month    | category  | amount |
++----------+-----------+-------+
+| January  |Electronics| 1500  |
+| January  | Clothing | 1200  |
+| February |Electronics| 1800  |
+| February | Clothing | 1300  |
+| March    |Electronics| 1600  |
+| March    | Clothing | 1100  |
+| April    |Electronics| 1700  |
+| April    | Clothing | 1400  |
++----------+-----------+-------+
+
+output table:
++---------+---------+------------+
+| month   | Clothing | Electronics |
++---------+---------+------------+
+| April   | 1400    | 1700       |
+| February| 1300    | 1800       |
+| January | 1200    | 1500       |
+| March   | 1100    | 1600       |
++---------+---------+------------+	

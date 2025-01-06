@@ -1,33 +1,30 @@
-( Mphasis Interview Question )
-Given us an empdept_tbl table, we need to update scores column values with department wise maximum score.
-Write an SQL QUERY to update the scores column values with department wise maximum scores.
+Given a table of entries where each person can visit multiple floors and use various resources on those floors, write an SQL query that returns the following:
 
-DDL & DML QUERY:
+The total number of visits for each person.
+The floor that the person visited the most.
+A comma-separated list of unique resources that the person used during all of their visits.
 
-create table empdept_tbl (eid int, dept varchar(50),scores float)
-insert into empdept_tbl values (1, 'd1', 1.0),(2, 'd1', 5.28),(3, 'd1', 4.0),(4,'d2', 8.0),(5, 'd1', 2.5),(6, 'd2', 7.0),(7, 'd3', 9.0),(8, 'd4', 10.2)
+name	address		email		floor	resources
+A		Bangalore	A@gmail.com		1	CPU
+A		Bangalore	A1@gmail.com	1	CPU
+A		Bangalore	A2@gmail.com	2	DESKTOP
+A		Bangalore	A2@gmail.com	2	DESKTOP
+B		Bangalore	B@gmail.com		2	DESKTOP
+B		Bangalore	B2@gmail.com	1	MONITOR
 
+OUTPUT
 
-INPUT 
+name	total_visits	most_visited_floor	resources_used
+A			3				1				CPU,DESKTOP
+B			2				2				DESKTOP,MONITOR
 
-SNO	eid	dept	scores
-1	1	d1		1
-2	2	d1		5.28
-3	3	d1		4
-4	4	d2		8
-5	5	d1		2.5
-6	6	d2		7
-7	7	d3		9
-8	8	d4		10.2
+create table entries ( 
+name varchar(20),
+address varchar(20),
+email varchar(20),
+floor int,
+resources varchar(10));
 
-OUTPUT:
-SNO	eid	dept	scores
-1	1	d1		5.28
-2	2	d1		5.28
-3	3	d1		5.28
-4	4	d2		8
-5	5	d1		5.28
-6	6	d2		8
-7	7	d3		9
-8	8	d4		10.2
-
+insert into entries 
+values ('A','Bangalore','A@gmail.com',1,'CPU'),('A','Bangalore','A1@gmail.com',1,'CPU'),('A','Bangalore','A2@gmail.com',2,'DESKTOP')
+,('B','Bangalore','B@gmail.com',2,'DESKTOP'),('B','Bangalore','B1@gmail.com',2,'DESKTOP'),('B','Bangalore','B2@gmail.com',1,'MONITOR')
