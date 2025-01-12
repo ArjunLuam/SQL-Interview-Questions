@@ -1,39 +1,66 @@
-ou are given a table of tennis players and their matches that they could either win (W) or lose (L). 
-Find the longest streak of wins. A streak is a set of consecutive won matches of one player. 
-The streak ends once a player loses their next match. Output the ID of the player or players and the length of the streak.
+For each region find house which has won the maximum number of battles. Display region, house, no. of wins
+
+DDL & DML Queries:
+
+CREATE TABLE king (
+ k_no INT PRIMARY KEY,
+ king VARCHAR(50),
+ house VARCHAR(50)
+);
+
+CREATE TABLE battle (
+ battle_number INT PRIMARY KEY,
+ name VARCHAR(100),
+ attacker_king INT,
+ defender_king INT,
+ attacker_outcome INT,
+ region VARCHAR(50),
+ FOREIGN KEY (attacker_king) REFERENCES king(k_no),
+ FOREIGN KEY (defender_king) REFERENCES king(k_no)
+);
+
+INSERT INTO king (k_no, king, house) VALUES
+(1, 'Robb Stark', 'House Stark'),
+(2, 'Joffrey Baratheon', 'House Lannister'),
+(3, 'Stannis Baratheon', 'House Baratheon'),
+(4, 'Balon Greyjoy', 'House Greyjoy'),
+(5, 'Mace Tyrell', 'House Tyrell'),
+(6, 'Doran Martell', 'House Martell');
+
+INSERT INTO battle (battle_number, name, attacker_king, defender_king, attacker_outcome, region) VALUES
+(1, 'Battle of Oxcross', 1, 2, 1, 'The North'),
+(2, 'Battle of Blackwater', 3, 4, 0, 'The North'),
+(3, 'Battle of the Fords', 1, 5, 1, 'The Reach'),
+(4, 'Battle of the Green Fork', 2, 6, 0, 'The Reach'),
+(5, 'Battle of the Ruby Ford', 1, 3, 1, 'The Riverlands'),
+(6, 'Battle of the Golden Tooth', 2, 1, 0, 'The North'),
+(7, 'Battle of Riverrun', 3, 4, 1, 'The Riverlands'),
+(8, 'Battle of Riverrun', 1, 3, 0, 'The Riverlands');
 
 
+INPUT : 
 
-𝐒𝐜𝐡𝐞𝐦𝐚 𝐚𝐧𝐝 𝐃𝐚𝐭𝐚𝐬𝐞𝐭
-CREATE TABLE players_results ( match_date DATETIME, match_result VARCHAR(1), player_id BIGINT);
++-------+--------------------+------------------+
+| k_no  | king               | house            |
++-------+--------------------+------------------+
+| 1     | Robb Stark         | House Stark      |
+| 2     | Joffrey Baratheon  | House Lannister  |
+| 3     | Stannis Baratheon  | House Baratheon  |
+| 4     | Balon Greyjoy      | House Greyjoy    |
+| 5     | Mace Tyrell        | House Tyrell     |
+| 6     | Doran Martell      | House Martell    |
++-------+--------------------+------------------+
 
-INSERT INTO players_results (match_date, match_result, player_id) VALUES ('2023-01-01', 'W', 1), 
-('2023-01-02', 'W', 1), ('2023-01-03', 'L', 1), ('2023-01-04', 'W', 1), ('2023-01-01', 'L', 2), 
-('2023-01-02', 'W', 2), ('2023-01-03', 'W', 2), ('2023-01-04', 'W', 2), ('2023-01-05', 'L', 2), ('2023-01-01', 'W', 3),
- ('2023-01-02', 'W', 3), ('2023-01-03', 'W', 3), ('2023-01-04', 'W', 3), ('2023-01-05', 'L', 3);
- 
- 
-INPUT:
 
-+-------------+-------------------------+--------------+----------+
-| match_date  | timestamp without time zone | match_result | player_id |
-+-------------+-------------------------+--------------+----------+
-| 2023-01-01 | 00:00:00                  | W            | 12       |
-| 2023-01-02 | 00:00:00                  | W            | 13       |
-| 2023-01-03 | 00:00:00                  | L            | 14       |
-| 2023-01-04 | 00:00:00                  | W            | 15       |
-| 2023-01-01 | 00:00:00                  | L            | 26       |
-| 2023-01-02 | 00:00:00                  | W            | 27       |
-| 2023-01-03 | 00:00:00                  | W            | 28       |
-| 2023-01-04 | 00:00:00                  | W            | 29       |
-| 2023-01-05 | 00:00:00                  | L            | 210      |
-| 2023-01-01 | 00:00:00                  | W            | 311      |
-| 2023-01-02 | 00:00:00                  | W            | 312      |
-| 2023-01-03 | 00:00:00                  | W            | 313      |
-| 2023-01-04 | 00:00:00                  | W            | 314      |
-| 2023-01-05 | 00:00:00                  | L            | 315      |
-+-------------+-------------------------+--------------+----------+
-
-OUTPUT:
-player_id win_streak
-  3	          4
++--------------+-------------------------+-----------------+-----------------+------------------+-----------------+
+| battle_number | name                   | attacker_king   | defender_king   | attacker_outcome | region          |
++--------------+-------------------------+-----------------+-----------------+------------------+-----------------+
+| 1            | Battle of Oxcross       | 1               | 2               | 1                | The North       |
+| 2            | Battle of Blackwater    | 3               | 4               | 0                | The North       |
+| 3            | Battle of the Fords     | 1               | 5               | 1                | The Reach       |
+| 4            | Battle of the Green Fork| 2               | 6               | 0                | The Reach       |
+| 5            | Battle of the Ruby Ford | 1               | 3               | 1                | The Riverlands  |
+| 6            | Battle of the Golden Tooth| 2             | 1               | 0                | The North       |
+| 7            | Battle of Riverrun      | 3               | 4               | 1                | The Riverlands  |
+| 8            | Battle of Riverrun      | 1               | 3               | 0                | The Riverlands  |
++--------------+-------------------------+-----------------+-----------------+------------------+-----------------+

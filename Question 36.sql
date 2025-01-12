@@ -1,33 +1,28 @@
-"Given a dataset of Airbnb search queries, how would you determine the most popular room types?"
+Write a SQL query to find the names of managers who directly manage at least five employees in the same department.
+Return the department name and the total number of direct reports for each manager.
+Note: Ensure that only the employees from departments with more than 10 total employees are considered in your query.
 
-create table airbnb_searches 
-(
-user_id int,
-date_searched date,
-filter_room_types varchar(200)
+DDL & DML QUERY:
+CREATE TABLE Walmart_Employee (
+ id INT PRIMARY KEY,
+ name VARCHAR(50),
+ department VARCHAR(50),
+ managerId INT
 );
-delete from airbnb_searches;
-insert into airbnb_searches values
-(1,'2022-01-01','entire home,private room')
-,(2,'2022-01-02','entire home,shared room')
-,(3,'2022-01-02','private room,shared room')
-,(4,'2022-01-03','private room');
 
-INPUT:
-+-----------+---------------+------------------------------+
-| user_id    | date_searched | filter_room_types            |
-+-----------+---------------+------------------------------+
-| 1          | 2022-01-01    | entire home, priva...        |
-| 2          | 2022-01-02    | entire home, share...         |
-| 3          | 2022-01-02    | private room, shar...         |
-| 4          | 2022-01-03    | private room                   |
-+-----------+---------------+------------------------------+
-
-OUTPUT:
-+-------------------+-------------------+
-| Room              | count(Room)       |
-+-------------------+-------------------+
-| private room       | 3                |
-| entire home        | 2                |
-| shared room        | 2                |
-+-------------------+-------------------+
+INSERT INTO Walmart_Employee (id, name, department, managerId) VALUES 
+(1, 'John', 'HR', NULL),
+(2, 'Bob', 'HR', 1),
+(3, 'Olivia', 'HR', 1),
+(4, 'Emma', 'Finance', NULL),
+(5, 'Sophia', 'HR', 1),
+(6, 'Mason', 'Finance', 4),
+(7, 'Ethan', 'HR', 1),
+(8, 'Ava', 'HR', 1),
+(9, 'Lucas', 'HR', 1),
+(10, 'Isabella', 'Finance', 4),
+(11, 'Harper', 'Finance', 4),
+(12, 'Hemla', 'HR', 3),
+(13, 'Aisha', 'HR', 2),
+(14, 'Himani', 'HR', 2),
+(15, 'Lily', 'HR', 2);

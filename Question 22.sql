@@ -1,50 +1,47 @@
-You are given two tables: players and matches.
+Several friends at a cinema ticket office would like to reserve consecutive available seats.
+query all the consecutive seats order by the seat_id using the following cinema table
 
-The players table contains information about the players, including their player_id and group_id.
-
-The matches table contains information about the matches played between players, including the match_id, player1_id, player2_id, player1_score, and player2_score.
-
-You need to write an SQL query to find the winner in each group. The winner is the player who scored the maximum total points within the group. In case of a tie, the player with the lowest player_id wins.
-
-create table players
-(player_id int,
-group_id int)
-
-insert into players values (15,1);
-insert into players values (25,1);
-insert into players values (30,1);
-insert into players values (45,1);
-insert into players values (10,2);
-insert into players values (35,2);
-insert into players values (50,2);
-insert into players values (20,3);
-insert into players values (40,3);
-
-create table matches
-(
-match_id int,
-first_player int,
-second_player int,
-first_score int,
-second_score int)
-
-insert into matches values (1,15,45,3,0);
-insert into matches values (2,30,25,1,2);
-insert into matches values (3,30,15,2,0);
-insert into matches values (4,40,20,5,2);
-insert into matches values (5,35,50,1,1);
+DDL & DML QUERIES:
+CREATE TABLE cinema (
+ seat_id INT PRIMARY KEY,
+ free int
+);
+delete from cinema;
+INSERT INTO cinema (seat_id, free) VALUES (1, 1);
+INSERT INTO cinema (seat_id, free) VALUES (2, 0);
+INSERT INTO cinema (seat_id, free) VALUES (3, 1);
+INSERT INTO cinema (seat_id, free) VALUES (4, 1);
+INSERT INTO cinema (seat_id, free) VALUES (5, 1);
+INSERT INTO cinema (seat_id, free) VALUES (6, 0);
+INSERT INTO cinema (seat_id, free) VALUES (7, 1);
+INSERT INTO cinema (seat_id, free) VALUES (8, 1);
+INSERT INTO cinema (seat_id, free) VALUES (9, 0);
+INSERT INTO cinema (seat_id, free) VALUES (10, 1);
+INSERT INTO cinema (seat_id, free) VALUES (11, 0);
+INSERT INTO cinema (seat_id, free) VALUES (12, 1);
+INSERT INTO cinema (seat_id, free) VALUES (13, 0);
+INSERT INTO cinema (seat_id, free) VALUES (14, 1);
+INSERT INTO cinema (seat_id, free) VALUES (15, 1);
+INSERT INTO cinema (seat_id, free) VALUES (16, 0);
+INSERT INTO cinema (seat_id, free) VALUES (17, 1);
+INSERT INTO cinema (seat_id, free) VALUES (18, 1);
+INSERT INTO cinema (seat_id, free) VALUES (19, 1);
+INSERT INTO cinema (seat_id, free) VALUES (20, 1);
 
 
+Output :
 
-The output should be a table with the following columns:
-
-group_id
-winner_player_id
-Example:
-
-group_id	winner_player_id
-1			15
-2			35
-3			45
+Sno	seat_id
+1	3
+2	4
+3	5
+4	7
+5	8
+6	14
+7	15
+8	17
+9	18
+10	19
+11	20
 
 

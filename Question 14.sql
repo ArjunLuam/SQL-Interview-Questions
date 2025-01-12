@@ -1,33 +1,17 @@
-( Mphasis Interview Question )
-Given us an empdept_tbl table, we need to update scores column values with department wise maximum score.
-Write an SQL QUERY to update the scores column values with department wise maximum scores.
+Given a table we need to find out the total number of rides by each brand and how many times brand won by delivering order fast, and how many time lost. The desired output shown below
 
 DDL & DML QUERY:
 
-create table empdept_tbl (eid int, dept varchar(50),scores float)
-insert into empdept_tbl values (1, 'd1', 1.0),(2, 'd1', 5.28),(3, 'd1', 4.0),(4,'d2', 8.0),(5, 'd1', 2.5),(6, 'd2', 7.0),(7, 'd3', 9.0),(8, 'd4', 10.2)
+CREATE TABLE Delievry_Partner (
+ Brand_1 VARCHAR(512),
+ Brand_2 VARCHAR(512),
+ Brand_3 VARCHAR(512),
+ Winner VARCHAR(512)
+);
 
-
-INPUT 
-
-SNO	eid	dept	scores
-1	1	d1		1
-2	2	d1		5.28
-3	3	d1		4
-4	4	d2		8
-5	5	d1		2.5
-6	6	d2		7
-7	7	d3		9
-8	8	d4		10.2
-
-OUTPUT:
-SNO	eid	dept	scores
-1	1	d1		5.28
-2	2	d1		5.28
-3	3	d1		5.28
-4	4	d2		8
-5	5	d1		5.28
-6	6	d2		8
-7	7	d3		9
-8	8	d4		10.2
-
+INSERT INTO Delievry_Partner (Brand_1, Brand_2, Brand_3, Winner) VALUES
+ ('A', 'B', 'C', 'B'),
+ ('B', 'C', 'E', 'E'),
+ ('C', 'A', 'D', 'D'),
+ ('D', 'E', 'A', 'A'),
+ ('F', 'B', 'C', 'F');

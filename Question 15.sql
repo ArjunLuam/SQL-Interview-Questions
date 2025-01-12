@@ -1,46 +1,30 @@
-Write an SQL query to fill the Null value with its previous row value as shown in the output table.
+Given a table of entries where each person can visit multiple floors and use various resources on those floors, write an SQL query that returns the following:
 
-DDL & DML QUERY:
-CREATE TABLE student_table (
- 
- Student_id INT,
- Dept_id VARCHAR(512)
-);
+The total number of visits for each person.
+The floor that the person visited the most.
+A comma-separated list of unique resources that the person used during all of their visits.
 
-INSERT INTO student_table ( Student_id, Dept_id) VALUES ('1', '105');
-INSERT INTO student_table ( Student_id, Dept_id) VALUES ('2', NULL);
-INSERT INTO student_table ( Student_id, Dept_id) VALUES ( '3', NULL);
-INSERT INTO student_table ( Student_id, Dept_id) VALUES ('4', NULL);
-INSERT INTO student_table ( Student_id, Dept_id) VALUES ('11', '110');
-INSERT INTO student_table ( Student_id, Dept_id) VALUES ('12', NULL);
-INSERT INTO student_table ( Student_id, Dept_id) VALUES ('13', NULL);
+name	address		email		floor	resources
+A		Bangalore	A@gmail.com		1	CPU
+A		Bangalore	A1@gmail.com	1	CPU
+A		Bangalore	A2@gmail.com	2	DESKTOP
+A		Bangalore	A2@gmail.com	2	DESKTOP
+B		Bangalore	B@gmail.com		2	DESKTOP
+B		Bangalore	B2@gmail.com	1	MONITOR
 
+OUTPUT
 
-INPUT 
+name	total_visits	most_visited_floor	resources_used
+A			3				1				CPU,DESKTOP
+B			2				2				DESKTOP,MONITOR
 
-student_id	dept_id
+create table entries ( 
+name varchar(20),
+address varchar(20),
+email varchar(20),
+floor int,
+resources varchar(10));
 
-1			105
-2			null
-3			null
-4			null
-11			110
-12			null
-13			null
-14			null
-15			112
-16			null
-
-output
-
-student_id	dept_id
-1			105
-2			105
-3			105
-4			105
-11			110
-12			110
-13			110
-14			110
-15			112
-16			112
+insert into entries 
+values ('A','Bangalore','A@gmail.com',1,'CPU'),('A','Bangalore','A1@gmail.com',1,'CPU'),('A','Bangalore','A2@gmail.com',2,'DESKTOP')
+,('B','Bangalore','B@gmail.com',2,'DESKTOP'),('B','Bangalore','B1@gmail.com',2,'DESKTOP'),('B','Bangalore','B2@gmail.com',1,'MONITOR')

@@ -1,59 +1,56 @@
-Problem Statement : Write an SQL query to categorize the users into
---> Light User: if average activity time is equal or more than 60 minutes and less than 90 minutes
---> Medium User: if average activity time is equal or more than 90 minutes and less than 120 minutes
---> Heavy User: if average activity time is equal or more than 120 minutes
-NOTE: Users have multiple login and logout per day
+Given a city_distance table with columns distance, source, and destination, write a query to find routes that either Lack a reverse route, Have inconsistent distances between the forward and reverse routes, or
+List duplicate entries once.( SOURCE AND DESTINATION)
 
-
-Scripts : 
-
-CREATE TABLE UserActivity (
-id INT,
-activity_time timestamp,
-type VARCHAR(20)
+DDL & DML QUERY:
+CREATE TABLE city_distance
+(
+ distance INT,
+ source VARCHAR(512),
+ destination VARCHAR(512)
 );
+INSERT INTO city_distance(distance, source, destination) VALUES ('100', 'New Delhi', 'Panipat');
+INSERT INTO city_distance(distance, source, destination) VALUES ('200', 'Ambala', 'New Delhi');
+INSERT INTO city_distance(distance, source, destination) VALUES ('150', 'Bangalore', 'Mysore');
+INSERT INTO city_distance(distance, source, destination) VALUES ('150', 'Mysore', 'Bangalore');
+INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Mumbai', 'Pune');
+INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Pune', 'Mumbai');
+INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Jammu', 'Srinagar');
+INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Srinagar', 'Jammu');
+INSERT INTO city_distance(distance, source, destination) VALUES ('2500', 'Chennai', 'Bhopal');
+INSERT INTO city_distance(distance, source, destination) VALUES ('2500', 'Bhopal', 'Chennai');
+INSERT INTO city_distance(distance, source, destination) VALUES ('60', 'Tirupati', 'Tirumala');
+INSERT INTO city_distance(distance, source, destination) VALUES ('80', 'Tirumala', 'Tirupati');
 
-INSERT INTO UserActivity (id, activity_time, type) VALUES
+INPUT:
 
--- Day 1
++-----------+-----------+-------------+
+| distance  | source    | destination |
++-----------+-----------+-------------+
+| 100       | New Delhi | Panipat     |
+| 200       | Ambala    | New Delhi   |
+| 150       | Bangalore | Mysore      |
+| 150       | Mysore    | Bangalore   |
+| 250       | Mumbai    | Pune        |
+| 250       | Pune      | Mumbai      |
+| 250       | Jammu     | Srinagar    |
+| 250       | Srinagar  | Jammu      |
+| 2500      | Chennai   | Bhopal      |
+| 2500      | Bhopal    | Chennai     |
+| 60        | Tirupati  | Tirumala    |
+| 80        | Tirumala  | Tirupati    |
++-----------+-----------+-------------+
 
-(1, '2024-10-01 08:00:00', 'log in'),
-(1, '2024-10-01 08:15:30', 'scroll'),
-(1, '2024-10-01 08:30:00', 'log out'),
-(1, '2024-10-01 12:00:00', 'log in'),
-(1, '2024-10-01 12:10:30', 'scroll'),
-(1, '2024-10-01 12:30:00', 'log out'),
-(2, '2024-10-01 09:00:00', 'log in'),
-(2, '2024-10-01 09:15:45', 'scroll'),
-(2, '2024-10-01 09:45:00', 'log out'),
-(2, '2024-10-01 14:30:00', 'log in'),
-(2, '2024-10-01 14:50:00', 'scroll'),
-(2, '2024-10-01 15:30:00', 'log out'),
-(3, '2024-10-01 07:45:00', 'log in'),
-(3, '2024-10-01 08:00:00', 'scroll'),
-(3, '2024-10-01 08:30:00', 'log out'),
-(3, '2024-10-01 11:15:00', 'log in'),
-(3, '2024-10-01 11:25:00', 'scroll'),
-(3, '2024-10-01 12:00:00', 'log out'),
+output:
 
-
--- Day 2
-
-(1, '2024-10-02 09:00:00', 'log in'),
-(1, '2024-10-02 09:20:00', 'scroll'),
-(1, '2024-10-02 09:40:00', 'log out'),
-(1, '2024-10-02 14:00:00', 'log in'),
-(1, '2024-10-02 14:15:00', 'scroll'),
-(1, '2024-10-02 14:45:00', 'log out'),
-(2, '2024-10-02 08:30:00', 'log in'),
-(2, '2024-10-02 08:50:00', 'scroll'),
-(2, '2024-10-02 09:15:00', 'log out'),
-(2, '2024-10-02 12:45:00', 'log in'),
-(2, '2024-10-02 13:10:00', 'scroll'),
-(2, '2024-10-02 14:30:00', 'log out'),
-(3, '2024-10-02 07:30:00', 'log in'),
-(3, '2024-10-02 07:50:00', 'scroll'),
-(3, '2024-10-02 08:20:00', 'log out'),
-(3, '2024-10-02 10:00:00', 'log in'),
-(3, '2024-10-02 10:15:00', 'scroll'),
-(3, '2024-10-02 10:45:00', 'log out');
++-----------+-----------+-------------+
+| distance  | source    | destination |
++-----------+-----------+-------------+
+| 100       | New Delhi | Panipat     |
+| 200       | Ambala    | New Delhi   |
+| 150       | Bangalore | Mysore      |
+| 250       | Mumbai    | Pune        |
+| 250       | Jammu     | Srinagar    |
+| 2500      | Chennai   | Bhopal      |
+| 60        | Tirupati  | Tirumala    |
+| 80        | Tirumala  | Tirupati    |
++-----------+-----------+-------------+

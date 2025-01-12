@@ -1,30 +1,60 @@
-Given a table of entries where each person can visit multiple floors and use various resources on those floors, write an SQL query that returns the following:
+Assign the Row number without using ROW_NUMBER() Window function.
 
-The total number of visits for each person.
-The floor that the person visited the most.
-A comma-separated list of unique resources that the person used during all of their visits.
+DDL & DML Query:
 
-name	address		email		floor	resources
-A		Bangalore	A@gmail.com		1	CPU
-A		Bangalore	A1@gmail.com	1	CPU
-A		Bangalore	A2@gmail.com	2	DESKTOP
-A		Bangalore	A2@gmail.com	2	DESKTOP
-B		Bangalore	B@gmail.com		2	DESKTOP
-B		Bangalore	B2@gmail.com	1	MONITOR
+-- Create the department table
+CREATE TABLE department (
+ department_id INT,
+ employee_id INT,
+ name VARCHAR(50)
+);
 
-OUTPUT
+-- Insert data into the department table
+INSERT INTO department (department_id, employee_id, name) VALUES
+(1, 1, 'Anna'),
+(1, 2, 'Ben'),
+(2, 3, 'Charlie'),
+(2, 4, 'David'),
+(1, 5, 'Eva'),
+(3, 6, 'George'),
+(3, 7, 'John');
+Input Table:
+department_id employee_id name
+1 1 Anna
+1 2 Ben
+2 3 Charlie
+2 4 David
+1 5 Eva
+3 6 George
+3 7 John
 
-name	total_visits	most_visited_floor	resources_used
-A			3				1				CPU,DESKTOP
-B			2				2				DESKTOP,MONITOR
+Output Table:
 
-create table entries ( 
-name varchar(20),
-address varchar(20),
-email varchar(20),
-floor int,
-resources varchar(10));
+department_id employee_id name rn
+1 1 Anna 1
+1 2 Ben 2
+2 3 Charlie 1
+2 4 David 2
+1 5 Eva 3
+3 6 George 1
+3 7 John 2
 
-insert into entries 
-values ('A','Bangalore','A@gmail.com',1,'CPU'),('A','Bangalore','A1@gmail.com',1,'CPU'),('A','Bangalore','A2@gmail.com',2,'DESKTOP')
-,('B','Bangalore','B@gmail.com',2,'DESKTOP'),('B','Bangalore','B1@gmail.com',2,'DESKTOP'),('B','Bangalore','B2@gmail.com',1,'MONITOR')
+SOLUTION:
+
+
+SELECT 
+    d.department_id, 
+    d.employee_id, 
+    d.name, 
+    COUNT(d1.employee_id) AS rn
+FROM 
+    department d
+INNER JOIN 
+    department d1 
+ON 
+    d.department_id = d1.department_id 
+    AND d.employee_id >= d1.employee_id
+GROUP BY 
+    d.department_id, 
+    d.employee_id, 
+    d.name ORDER BY department_id,d.employee_id;

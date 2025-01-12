@@ -1,56 +1,40 @@
-Given a city_distance table with columns distance, source, and destination, write a query to find routes that either Lack a reverse route, Have inconsistent distances between the forward and reverse routes, or
-List duplicate entries once.( SOURCE AND DESTINATION)
+There is an e-commerce website that has both a mobile app and a desktop website. 
+The spending history of the users is given, which includes the spend date, user ID, platform (mobile or desktop), and amount spent.
 
-DDL & DML QUERY:
-CREATE TABLE city_distance
-(
- distance INT,
- source VARCHAR(512),
- destination VARCHAR(512)
-);
-INSERT INTO city_distance(distance, source, destination) VALUES ('100', 'New Delhi', 'Panipat');
-INSERT INTO city_distance(distance, source, destination) VALUES ('200', 'Ambala', 'New Delhi');
-INSERT INTO city_distance(distance, source, destination) VALUES ('150', 'Bangalore', 'Mysore');
-INSERT INTO city_distance(distance, source, destination) VALUES ('150', 'Mysore', 'Bangalore');
-INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Mumbai', 'Pune');
-INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Pune', 'Mumbai');
-INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Jammu', 'Srinagar');
-INSERT INTO city_distance(distance, source, destination) VALUES ('250', 'Srinagar', 'Jammu');
-INSERT INTO city_distance(distance, source, destination) VALUES ('2500', 'Chennai', 'Bhopal');
-INSERT INTO city_distance(distance, source, destination) VALUES ('2500', 'Bhopal', 'Chennai');
-INSERT INTO city_distance(distance, source, destination) VALUES ('60', 'Tirupati', 'Tirumala');
-INSERT INTO city_distance(distance, source, destination) VALUES ('80', 'Tirumala', 'Tirupati');
+The question is to write an SQL query to find the total number of users and
+the total amount spent using mobile only, desktop only, and both mobile and desktop together for each date.
 
 INPUT:
 
-+-----------+-----------+-------------+
-| distance  | source    | destination |
-+-----------+-----------+-------------+
-| 100       | New Delhi | Panipat     |
-| 200       | Ambala    | New Delhi   |
-| 150       | Bangalore | Mysore      |
-| 150       | Mysore    | Bangalore   |
-| 250       | Mumbai    | Pune        |
-| 250       | Pune      | Mumbai      |
-| 250       | Jammu     | Srinagar    |
-| 250       | Srinagar  | Jammu      |
-| 2500      | Chennai   | Bhopal      |
-| 2500      | Bhopal    | Chennai     |
-| 60        | Tirupati  | Tirumala    |
-| 80        | Tirumala  | Tirupati    |
-+-----------+-----------+-------------+
+| user_id | spend_date | platform | amount |
+|---|---|---|---|
+| 1 | 2019-07-01 | mobile | 100 |
+| 1 | 2019-07-01 | desktop | 100 |
+| 2 | 2019-07-01 | mobile | 100 |
+| 2 | 2019-07-02 | mobile | 100 |
+| 3 | 2019-07-01 | desktop | 100 |
+| 3 | 2019-07-02 | desktop | 100  |
 
-output:
+OUTPUT:
 
-+-----------+-----------+-------------+
-| distance  | source    | destination |
-+-----------+-----------+-------------+
-| 100       | New Delhi | Panipat     |
-| 200       | Ambala    | New Delhi   |
-| 150       | Bangalore | Mysore      |
-| 250       | Mumbai    | Pune        |
-| 250       | Jammu     | Srinagar    |
-| 2500      | Chennai   | Bhopal      |
-| 60        | Tirupati  | Tirumala    |
-| 80        | Tirumala  | Tirupati    |
-+-----------+-----------+-------------+
+| spend_date | amount | platform | total_users |
+|---|---|---|---|
+| 2019-07-01 | 200 | both 		| 1 |
+| 2019-07-01 | 100 | desktop 	| 1 |
+| 2019-07-01 | 100 | mobile 	| 1 |
+| 2019-07-02 | 0   | both 		| 0 |
+| 2019-07-02 | 100 | desktop 	| 1 |
+| 2019-07-02 | 100 | mobile 	| 1 |
+
+Query:
+
+create table spending 
+(
+user_id int,
+spend_date date,
+platform varchar(10),
+amount int
+);
+
+insert into spending values(1,'2019-07-01','mobile',100),(1,'2019-07-01','desktop',100),(2,'2019-07-01','mobile',100)
+,(2,'2019-07-02','mobile',100),(3,'2019-07-01','desktop',100),(3,'2019-07-02','desktop',100);

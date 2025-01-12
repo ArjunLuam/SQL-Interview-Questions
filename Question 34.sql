@@ -1,28 +1,53 @@
-Write a SQL query to find the names of managers who directly manage at least five employees in the same department.
-Return the department name and the total number of direct reports for each manager.
-Note: Ensure that only the employees from departments with more than 10 total employees are considered in your query.
+Note: parent_id is null for posts.
+parent_id for comments is sub_id for another post in the table.
+Write an sql query to find the number of comments per post.
+Result table should contain post_id and its corresponding number_of_comments, and must be sorted by post_id in ascending order.
+--> Submissions may contain duplicate comments. You should count the number of unique comments per post.
+--> Submissions may contain duplicate posts. You should treat them as one post.
 
 DDL & DML QUERY:
-CREATE TABLE Walmart_Employee (
- id INT PRIMARY KEY,
- name VARCHAR(50),
- department VARCHAR(50),
- managerId INT
+CREATE TABLE Submissions (
+ sub_id INT,
+ parent_id INT
 );
+INSERT INTO Submissions (sub_id, parent_id) VALUES
+(1, NULL),
+(2, NULL),
+(1, NULL),
+(12, NULL),
+(3, 1),
+(5, 2),
+(3, 1),
+(4, 1),
+(9, 1),
+(10, 2),
+(6, 7);
 
-INSERT INTO Walmart_Employee (id, name, department, managerId) VALUES 
-(1, 'John', 'HR', NULL),
-(2, 'Bob', 'HR', 1),
-(3, 'Olivia', 'HR', 1),
-(4, 'Emma', 'Finance', NULL),
-(5, 'Sophia', 'HR', 1),
-(6, 'Mason', 'Finance', 4),
-(7, 'Ethan', 'HR', 1),
-(8, 'Ava', 'HR', 1),
-(9, 'Lucas', 'HR', 1),
-(10, 'Isabella', 'Finance', 4),
-(11, 'Harper', 'Finance', 4),
-(12, 'Hemla', 'HR', 3),
-(13, 'Aisha', 'HR', 2),
-(14, 'Himani', 'HR', 2),
-(15, 'Lily', 'HR', 2);
+INPUT:
+
++-----------+--------------+
+| sub_id    | parent_id    |
++-----------+--------------+
+| 1         | null         |
+| 2         | null         |
+| 1         | null         |
+| 12        | null         |
+| 3         | 1            |
+| 5         | 2            |
+| 3         | 1            |
+| 4         | 1            |
+| 9         | 1            |
+| 10        | 2            |
+| 6         | 7            |
++-----------+--------------+
+
+
+output:
+
++-----------+------------------+
+| post_id    | no_of_comments   |
++-----------+------------------+
+| 1          | 3                |
+| 2          | 2                |
+| 12         | 0                |
++-----------+------------------+

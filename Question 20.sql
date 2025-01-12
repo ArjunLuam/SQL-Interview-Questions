@@ -1,47 +1,47 @@
-Several friends at a cinema ticket office would like to reserve consecutive available seats.
-query all the consecutive seats order by the seat_id using the following cinema table
+Find total number of message exchanged between 2 person each day.
 
-DDL & DML QUERIES:
-CREATE TABLE cinema (
- seat_id INT PRIMARY KEY,
- free int
+DDL & DML query:
+
+ CREATE TABLE subscriber (
+ sms_date date ,
+ sender varchar(20) ,
+ receiver varchar(20) ,
+ sms_no int
 );
-delete from cinema;
-INSERT INTO cinema (seat_id, free) VALUES (1, 1);
-INSERT INTO cinema (seat_id, free) VALUES (2, 0);
-INSERT INTO cinema (seat_id, free) VALUES (3, 1);
-INSERT INTO cinema (seat_id, free) VALUES (4, 1);
-INSERT INTO cinema (seat_id, free) VALUES (5, 1);
-INSERT INTO cinema (seat_id, free) VALUES (6, 0);
-INSERT INTO cinema (seat_id, free) VALUES (7, 1);
-INSERT INTO cinema (seat_id, free) VALUES (8, 1);
-INSERT INTO cinema (seat_id, free) VALUES (9, 0);
-INSERT INTO cinema (seat_id, free) VALUES (10, 1);
-INSERT INTO cinema (seat_id, free) VALUES (11, 0);
-INSERT INTO cinema (seat_id, free) VALUES (12, 1);
-INSERT INTO cinema (seat_id, free) VALUES (13, 0);
-INSERT INTO cinema (seat_id, free) VALUES (14, 1);
-INSERT INTO cinema (seat_id, free) VALUES (15, 1);
-INSERT INTO cinema (seat_id, free) VALUES (16, 0);
-INSERT INTO cinema (seat_id, free) VALUES (17, 1);
-INSERT INTO cinema (seat_id, free) VALUES (18, 1);
-INSERT INTO cinema (seat_id, free) VALUES (19, 1);
-INSERT INTO cinema (seat_id, free) VALUES (20, 1);
+-- insert some values
+INSERT INTO subscriber VALUES ('2020-4-1', 'Avinash', 'Vibhor',10);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Avinash',20);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Avinash', 'Pawan',30);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Pawan', 'Avinash',20);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Pawan',5);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Pawan', 'Vibhor',8);
+INSERT INTO subscriber VALUES ('2020-4-1', 'Vibhor', 'Deepak',50);
+Input Table:
+sms_date sender receiver sms_no
+2020-04-01 Avinash Vibhor 10
+2020-04-01 Vibhor Avinash 20
+2020-04-01 Avinash Pawan 30
+2020-04-01 Pawan Avinash 20
+2020-04-01 Vibhor Pawan 5
+2020-04-01 Pawan Vibhor 8
+2020-04-01 Vibhor Deepak 50
 
+Output Table:
+sms_date sender receiver total_sms
+2020-04-01 Avinash Vibhor 30
+2020-04-01 Avinash Pawan 50
+2020-04-01 Pawan Vibhor 13
+2020-04-01 Deepak Vibhor 50
 
-Output :
+SOLUTION:
 
-Sno	seat_id
-1	3
-2	4
-3	5
-4	7
-5	8
-6	14
-7	15
-8	17
-9	18
-10	19
-11	20
-
-
+with t1 as(
+SELECT 
+        s.sms_date, 
+        LEAST(s.sender, s.receiver) AS sender, 
+        GREATEST(s.sender, s.receiver) AS receiver, 
+        s.sms_no 
+    FROM 
+        subscriber s 
+)
+select sms_date,sender,receiver,sum(sms_no) from t1 group by sms_date,sender,receiver

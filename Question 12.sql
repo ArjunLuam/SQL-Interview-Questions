@@ -1,17 +1,17 @@
-Given a table we need to find out the total number of rides by each brand and how many times brand won by delivering order fast, and how many time lost. The desired output shown below
+
+Write a sql query to arrange:
+Alphabets should have the corresponding words as shown in the expected output.
 
 DDL & DML QUERY:
+create table Alphabetwords(letter_word varchar(10));
 
-CREATE TABLE Delievry_Partner (
- Brand_1 VARCHAR(512),
- Brand_2 VARCHAR(512),
- Brand_3 VARCHAR(512),
- Winner VARCHAR(512)
-);
+insert into Alphabetwords values ('D'),('A'), ('B'), ('C'), ('E'), ('Dog'),('Ball'),('Cat'), ('Fish'), ('Elephant');
 
-INSERT INTO Delievry_Partner (Brand_1, Brand_2, Brand_3, Winner) VALUES
- ('A', 'B', 'C', 'B'),
- ('B', 'C', 'E', 'E'),
- ('C', 'A', 'D', 'D'),
- ('D', 'E', 'A', 'A'),
- ('F', 'B', 'C', 'F');
+
+
+alphabets	word
+A			Ball
+B			Cat
+C			Dog
+D			Elephant
+E			Fish

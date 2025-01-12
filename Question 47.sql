@@ -1,39 +1,39 @@
-You are given a list of exchange rates from various currencies to US Dollars (USD) in different months. 
-Show how the exchange rate of all the currencies changed in the first half of 2020.
- Output the currency code and the difference between values of the exchange rate between July 1, 2020 and January 1, 2020.
+ou are given a table of tennis players and their matches that they could either win (W) or lose (L). 
+Find the longest streak of wins. A streak is a set of consecutive won matches of one player. 
+The streak ends once a player loses their next match. Output the ID of the player or players and the length of the streak.
 
 
-CREATE TABLE sf_exchange_rates ( date DATETIME, exchange_rate FLOAT, source_currency VARCHAR(10), target_currency VARCHAR(10));
 
-INSERT INTO sf_exchange_rates (date, exchange_rate, source_currency, target_currency) VALUES ('2020-01-01', 1.12, 'EUR', 'USD'), ('2020-01-01', 1.31, 'GBP', 'USD'),
- ('2020-01-01', 109.56, 'JPY', 'USD'), ('2020-07-01', 1.17, 'EUR', 'USD'), ('2020-07-01', 1.29, 'GBP', 'USD'), ('2020-07-01', 109.66, 'JPY', 'USD'), 
-('2020-01-01', 0.75, 'AUD', 'USD'), ('2020-07-01', 0.73, 'AUD', 'USD'), ('2020-01-01', 6.98, 'CNY', 'USD'), ('2020-07-01', 7.05, 'CNY', 'USD');
+𝐒𝐜𝐡𝐞𝐦𝐚 𝐚𝐧𝐝 𝐃𝐚𝐭𝐚𝐬𝐞𝐭
+CREATE TABLE players_results ( match_date DATETIME, match_result VARCHAR(1), player_id BIGINT);
 
+INSERT INTO players_results (match_date, match_result, player_id) VALUES ('2023-01-01', 'W', 1), 
+('2023-01-02', 'W', 1), ('2023-01-03', 'L', 1), ('2023-01-04', 'W', 1), ('2023-01-01', 'L', 2), 
+('2023-01-02', 'W', 2), ('2023-01-03', 'W', 2), ('2023-01-04', 'W', 2), ('2023-01-05', 'L', 2), ('2023-01-01', 'W', 3),
+ ('2023-01-02', 'W', 3), ('2023-01-03', 'W', 3), ('2023-01-04', 'W', 3), ('2023-01-05', 'L', 3);
+ 
+ 
 INPUT:
-------------------------------------------------------------------
-| date       | exchange_rate | source_currency | target_currency |
-|-------------|---------------|-----------------|-----------------|
-| 2020-01-01 | 1.12           | EUR             | USD             |
-| 2020-01-01 | 1.31           | GBP             | USD             |
-| 2020-01-01 | 109.56         | JPY             | USD             |
-| 2020-07-01 | 1.17           | EUR             | USD             |
-| 2020-07-01 | 1.29           | GBP             | USD             |
-| 2020-07-01 | 109.66         | JPY             | USD             |
-| 2020-01-01 | 0.75           | AUD             | USD             |
-| 2020-07-01 | 0.73           | AUD             | USD             |
-| 2020-01-01 | 6.98           | CNY             | USD             |
-| 2020-07-01 | 7.05           | CNY             | USD             |
--------------------------------------------------------------------
+
++-------------+-------------------------+--------------+----------+
+| match_date  | timestamp without time zone | match_result | player_id |
++-------------+-------------------------+--------------+----------+
+| 2023-01-01 | 00:00:00                  | W            | 12       |
+| 2023-01-02 | 00:00:00                  | W            | 13       |
+| 2023-01-03 | 00:00:00                  | L            | 14       |
+| 2023-01-04 | 00:00:00                  | W            | 15       |
+| 2023-01-01 | 00:00:00                  | L            | 26       |
+| 2023-01-02 | 00:00:00                  | W            | 27       |
+| 2023-01-03 | 00:00:00                  | W            | 28       |
+| 2023-01-04 | 00:00:00                  | W            | 29       |
+| 2023-01-05 | 00:00:00                  | L            | 210      |
+| 2023-01-01 | 00:00:00                  | W            | 311      |
+| 2023-01-02 | 00:00:00                  | W            | 312      |
+| 2023-01-03 | 00:00:00                  | W            | 313      |
+| 2023-01-04 | 00:00:00                  | W            | 314      |
+| 2023-01-05 | 00:00:00                  | L            | 315      |
++-------------+-------------------------+--------------+----------+
 
 OUTPUT:
---------------------------------------
-| Row | source_currency | rate_change |
-|-----|-----------------|-------------|
-| 1   | AUD            | -0.02       |
-| 2   | CNY            | 0.07        |
-| 3   | EUR            | 0.05        |
-| 4   | GBP            | -0.02       |
-| 5   | JPY            | 0.1         |
---------------------------------------
-
-
+player_id win_streak
+  3	          4

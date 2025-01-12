@@ -1,31 +1,46 @@
-𝐅𝐢𝐧𝐝 𝐭𝐡𝐞 𝐨𝐫𝐢𝐠𝐢𝐧 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐝𝐞𝐬𝐭𝐢𝐧𝐚𝐭𝐢𝐨𝐧 𝐨𝐟 𝐞𝐚𝐜𝐡 𝐜𝐮𝐬𝐭𝐨𝐦𝐞𝐫 ?
+Write an SQL query to fill the Null value with its previous row value as shown in the output table.
 
-Note : There can be more than 1 stops for the same customer journey.
-
-CREATE TABLE flights_data (
-    cust_id INT,
-    flight_id VARCHAR(20),
-    origin VARCHAR(50),
-    destination VARCHAR(50)
+DDL & DML QUERY:
+CREATE TABLE student_table (
+ 
+ Student_id INT,
+ Dept_id VARCHAR(512)
 );
 
+INSERT INTO student_table ( Student_id, Dept_id) VALUES ('1', '105');
+INSERT INTO student_table ( Student_id, Dept_id) VALUES ('2', NULL);
+INSERT INTO student_table ( Student_id, Dept_id) VALUES ( '3', NULL);
+INSERT INTO student_table ( Student_id, Dept_id) VALUES ('4', NULL);
+INSERT INTO student_table ( Student_id, Dept_id) VALUES ('11', '110');
+INSERT INTO student_table ( Student_id, Dept_id) VALUES ('12', NULL);
+INSERT INTO student_table ( Student_id, Dept_id) VALUES ('13', NULL);
 
-INSERT INTO flights_data (cust_id, flight_id, origin, destination) VALUES
-(1, 'Flight1', 'Delhi', 'Hyderabad'),
-(1, 'Flight2', 'Hyderabad', 'Kochi'),
-(1, 'Flight3', 'Kochi', 'Mangalore'),
-(2, 'Flight1', 'Mumbai', 'Ayodhya'),
-(2, 'Flight2', 'Ayodhya', 'Gorakhpur');
 
-INPUT:
-cust_id	flight_id	origin	destination
-1		flight1		Delhi	Hyderabad
-1		flight2		Hyderabad	Kochi
-1		flight3		Kochi	Mangalore
-2		flight1		Mumbai	Ayodhya
-2		flight2		Ayodhya	Gorakhpur
+INPUT 
 
-output:
-cust_id	origin	destination
-1	Delhi	Mangalore
-2	Mumbai	Gorakhpur
+student_id	dept_id
+
+1			105
+2			null
+3			null
+4			null
+11			110
+12			null
+13			null
+14			null
+15			112
+16			null
+
+output
+
+student_id	dept_id
+1			105
+2			105
+3			105
+4			105
+11			110
+12			110
+13			110
+14			110
+15			112
+16			112

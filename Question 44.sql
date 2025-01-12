@@ -1,28 +1,37 @@
-Find the number of words in each business name. Avoid counting special symbols as words (e.g. &). Output the business name and its count of words.
+You are given a table tasks that contains information about tasks performed by a person, including the task_id, task_date, and task_status.
 
-CREATE TABLE sf_restaurant_health_violations(business_name VARCHAR(255))
+You need to write an SQL query to group the tasks into continuous groups based on the task_status and task_date. The output should be a table with the following columns:
 
-INSERT INTO sf_restaurant_health_violations VALUES ('John''s Pizza & Grill','Sushi-Hub','The Good Eatery Cafe','Burger Palace & More','Quick_&_Fresh')
+start_date
+end_date
+task_status
 
 INPUT:
-----------------------|
-|BUSINESS_NAME		  |
-----------------------|
-|John's Pizza & Grill |
-|Sushi-Hub 			  |
-|The Good Eatery Cafe |
-|Burger Palace & More |
-|Quick_&_Fresh		  |
-----------------------
+| date_value 		  | state |
+
+| 2019-01-01 00:00:00 | success |
+| 2019-01-02 00:00:00 | success |
+| 2019-01-03 00:00:00 | success |
+| 2019-01-04 00:00:00 | fail |
+| 2019-01-05 00:00:00 | fail |
+| 2019-01-06 00:00:00 | success |
 
 
-OUTPUT
-----------------------|-------- |
-|BUSINESS_NAME		  |LENGTH   |
-----------------------|-------- |
-|John s Pizza  Grill |  4       |
-|Sushi Hub 			  | 2       |
-|The Good Eatery Cafe | 4       |
-|Burger Palace More |   3       |
-|Quick Fresh		  | 2       |
---------------------------------|
+OUTPUT:
+
+| state | 		begin_task |				 end_task |
+
+| success 	| 2019-01-01 00:00:00 | 2019-01-03 00:00:00 |
+| fail 		| 2019-01-04 00:00:00 | 2019-01-05 00:00:00 |
+| success 	| 2019-01-06 00:00:00 | 2019-01-06 00:00:00 |
+
+
+Queries:
+
+CREATE TABLE tasks (
+    date_value TIMESTAMP,
+    state VARCHAR(10)
+);
+
+insert into tasks  values ('2019-01-01','success'),('2019-01-02','success'),('2019-01-03','success'),('2019-01-04','fail')
+,('2019-01-05','fail'),('2019-01-06','success')
